@@ -14,7 +14,7 @@ from common_func import *
 class Main_Process:
     def __init__(self):
         #메인 프로세스의 메세지박스
-        self.systemMessageBox = Queue(52)
+        self.systemMessageBox = Queue(53)
 
         #유저모듈명 사전수집
         self.userModuleNameList = getDirectoryList()
