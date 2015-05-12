@@ -17,5 +17,5 @@ def search(keyword):
     print("[To websearch]:"+keyword)
     webbrowser.open("https://www.google.co.kr/webhp?hl=ko#newwindow=1&hl=ko&q="+keyword)
     webbrowser.open("http://search.naver.com/search.naver?where=nexearch&query="+keyword+"&sm=top_hty&fbm=1&ie=utf8")
-    webbrowser.open("http://search.naver.com/search.naver?where=nexearch&query="+keyword+"&sm=top_hty&fbm=1&ie=utf8")
+    #webbrowser.open("http://search.naver.com/search.naver?where=nexearch&query="+keyword+"&sm=top_hty&fbm=1&ie=utf8")
     webbrowser.open("http://stackoverflow.com/search?q="+keyword)
