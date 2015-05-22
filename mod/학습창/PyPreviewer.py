@@ -98,7 +98,8 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         #'''Clear the editor window for a new file with name specified in fileSaveAs method.'''
         self.plainTextEdit_2.clear()
         self.statusBar().showMessage('새 소스파일 생성', 8000)
-
+        self.dirty = False
+        self.fileName = None
 
     def clickAction_fileOpen(self):
         fname, filter = QFileDialog.getOpenFileName(self, "소스파일 열기창", '.', "Python File(*.py)")
