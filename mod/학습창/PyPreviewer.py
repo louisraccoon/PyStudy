@@ -36,8 +36,8 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.process.readyReadStandardOutput.connect(self.stdoutReady)
         self.process.readyReadStandardError.connect(self.stderrReady)
         self.process.started.connect(lambda: print('ExampleProgramStarted!'))
-        self.process.finished.connect(lambda: print('ExampleProgramFinished!'))
-        print ('Starting process')
+        self.process.finished.connect(lambda:print('ExampleProgramFinished!'))
+        print('Starting process')
         #self.process.start('python', ['ExampleTest.py'])
 
     def createEvent(self):
@@ -143,7 +143,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.process.start('python', [self.fileName])
     def clickAction_ProgramStopButton(self):
         self.process.kill()
-        self.append_plainTextEdit_3("\n\n프로세스 종료 with exit code "+str(self.process.exitCode())+"\n\n")
+        self.append_plainTextEdit_3("\n\n프로세스 정지 with exit code "+str(self.process.exitCode())+"\n\n")
     def clickAction_ProgramEraseButton(self):
         self.plainTextEdit_3.clear()
     def append_plainTextEdit_3(self, text):

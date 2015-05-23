@@ -1,34 +1,34 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
-from common_module_lib import *
-print("loaded 학습창 module")
-from PyQt5.QtCore import QProcess
 import os
+from PyQt5.QtCore import QProcess
+from common_module_lib import *
+
 def initModule(systemMessageBox, myMessageBox):
     myModule = Module(systemMessageBox, myMessageBox)
     mainfunction(myModule)
+'''
+    <모듈 설명서>
+    모듈명 변경시 수정이 필요한 부분
+    1.modulefoldername ( 모듈폴더명)
+    2.runFileName( 파일명 )
+'''
 def mainfunction(system):
-    print("------학습창 process start -------")
+    ############### 모듈 정보 ############################
+    modulefoldername = "학습창"# 모듈폴더명과 항상 같아야한다.
+    runFileName = r"\PyPreviewer.py"# 모듈에서 실행할 파이썬 파일 꼭 파일명앞에 \(역슬래시 붙여주어야한다.)
+    ############################################################
+
+    print("------"+modulefoldername+" process start -------")
+    os.chdir('mod/'+modulefoldername) # 모듈 실행 PATH변경
+    temppath=os.getcwd()+runFileName
     while 1:
         message = system.receiveMessage()
-        print("[To 학습창]:"+message)
-        system.printMessage("학습창 receive:"+message)
         if message =="실행":
-            # Get the current environment end filter out the old
-            # PYTHONPATH variable if exists in the environment
-            env = [env for env in QProcess.systemEnvironment()
-                   if not env.startswith('PYTHONPATH=')]
-            # Add your PYTHONPATH
-            env.append('PYTHONPATH='+os.getcwd())
-            print(env)
-            #print(QProcess.systemEnvironment())
-            # Create a process, set the environment and run the script
-            system.printMessage("학습창 : 실행되었습니다.")
-            temppath=os.getcwd()+"\mod\학습창\PyPreviewer.py"
+            system.printMessage(modulefoldername+"모듈이 실행되었습니다.")
             mypreviewer_process=QProcess()
-            #mypreviewer_process.setProcessEnvironment(env)
-            print(temppath)
             mypreviewer_process.start('python', [temppath])
-            mypreviewer_process.started.connect(lambda: print('학습창ProgramStarted!'))
-
-
+        else:
+            system.printMessage(" <"+modulefoldername+"> 메시지목록 ")
+            system.printMessage("------------------------------------------------")
+            system.printMessage("1)실행          ex)'/학습창 실행'")
+            system.printMessage("------------------------------------------------")

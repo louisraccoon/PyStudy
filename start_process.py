@@ -77,15 +77,23 @@ class Main_Process:
                     self.sendMessage(0,"/print user say "+value)
                 elif value.find(' ') != -1 :
                     command, value = value.split(' ', 1)
-                    command = command[1:]
+                    command = command[1:]# 모듈명 앞에 붙은 슬래시 제거( ex:/mymod1 -> mymod1
                     #모듈에게 온 메세지 전달
                     if command in self.userModuleNameList:
                         moduleIndex = self.userModuleNameList.index(command)
                         self.sendMessage(moduleIndex, value)
                     else:
-                        self.sendMessage(0,"/print 존재하지않는 모듈명입니다.\n( ex: '/모듈명 메시지' )")
+                        self.sendMessage(0,"/print 존재하지않는 모듈명입니다.1\n( ex: '/모듈명 메시지' )")
+                        self.print_userModuleNameList()
                 else:
+                    modulename = value[1:]
+                    print(modulename)
+                    #모듈에게 온 메세지 전달
+                    if modulename in self.userModuleNameList:
+                        self.sendMessage(0,"/print 모듈에 전송할메시지도 입력해주세요\n( ex: '/모듈명 메시지' )")
+                    else:
                         self.sendMessage(0,"/print 존재하지않는 모듈명입니다.\n( ex: '/모듈명 메시지' )")
+                        self.print_userModuleNameList()
             elif "/programExit" == command:
                 quit()
             elif command[0] == '/':
@@ -96,12 +104,17 @@ class Main_Process:
                     self.sendMessage(moduleIndex, value)
                 else:
                     self.sendMessage(0,"/print 존재하지않는 모듈명입니다.\n( ex: '/모듈명 메시지' )")
+                    self.print_userModuleNameList()
 
 
     def running(self):
         while 1:
             #시스템 메시지 박스 불러오기
             self.parse_Message(self.receiveSystemMessage())
+    def print_userModuleNameList(self):
+        self.sendMessage(0,"/print <사용가능한 모듈 목록>")
+        for moduleName in self.userModuleNameList:
+            self.sendMessage(0,"/print ◎"+moduleName)
     def __del__(self):
         for i,v in enumerate(self.userModulePIDList):
             self.userModulePIDList[i].terminate()
