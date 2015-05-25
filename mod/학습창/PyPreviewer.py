@@ -1,9 +1,9 @@
-__author__ = 'KHS-1'
+# -*- coding: utf-8 -*-
 import sys
 import os
 import codecs
 import binascii
-from PyQt5.QtCore import QFile, QIODevice, QTextStream, QProcess, QUrl
+from PyQt5.QtCore import QFile, QIODevice, QTextStream, QProcess, QUrl, QRegExp, Qt
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog, QInputDialog,QMainWindow, QMessageBox, QWidget)
 
@@ -18,7 +18,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 
         #self.centralWidget = PyPreviewer(self)
         #self.setCentralWidget(self.centralWidget)
-
+        self.setupEditor()
         #메뉴 이벤트 생성
         self.createEvent()
 
@@ -161,6 +161,90 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         pythonhelp_process.started()
         #  TypeError: native Qt signal is not callable
 
+    def setupEditor(self):
+        font = QFont()
+        font.setFamily('Courier')
+        font.setFixedPitch(True)
+        font.setPointSize(10)
+
+        self.editor = self.plainTextEdit_2
+        self.editor.setFont(font)
+
+        self.highlighter = Highlighter(self.editor.document())
+
+class Highlighter(QSyntaxHighlighter):
+    def __init__(self, parent=None):
+        super(Highlighter, self).__init__(parent)
+
+        keywordFormat = QTextCharFormat()
+        keywordFormat.setForeground(Qt.darkYellow)
+        keywordFormat.setFontWeight(QFont.Bold)
+
+        keywordPatterns = ["\\bFalse\\b", "\\bNone\\b", "\\bTrue\\b","\\band\\b", "\\bas\\b", "\\bassert\\b",
+                "\\bbreak\\b", "\\bclass\\b", "\\bcontinue\\b", "\\bdef\\b",
+                "\\bdel\\b", "\\belif\\b", "\\belse\\b", "\\bexcept\\b",
+                "\\bfinally\\b", "\\bfor\\b", "\\bfrom\\b",
+                "\\bglobal\\b", "\\bif\\b", "\\bimport\\b", "\\bin\\b",
+                "\\bis\\b", "\\blambda\\b", "\\bnonlocal\\b",
+                "\\bnot\\b", "\\bor\\b", "\\bpass\\b",
+                "\\braise\\b", "\\breturn\\b", "\\btry\\b", "\\bwhile\\b",
+                "\\bwith\\b", "\\byield\\b"]
+
+        self.highlightingRules = [(QRegExp(pattern), keywordFormat)
+                for pattern in keywordPatterns]
+
+        commentFormat = QTextCharFormat()
+        commentFormat.setFontWeight(QFont.Bold)
+        commentFormat.setForeground(Qt.black)
+        self.highlightingRules.append((QRegExp("\\b#[^\n]*\\b"),
+                commentFormat))
+
+        singleLineCommentFormat = QTextCharFormat()
+        singleLineCommentFormat.setForeground(Qt.red)
+        self.highlightingRules.append((QRegExp("//[^\n]*"),singleLineCommentFormat))
+        self.multiLineCommentFormat = QTextCharFormat()
+        self.multiLineCommentFormat.setForeground(Qt.red)
+
+        quotationFormat = QTextCharFormat()
+        quotationFormat.setForeground(Qt.darkGreen)
+        self.highlightingRules.append((QRegExp("\".*\""), quotationFormat))
+
+        functionFormat = QTextCharFormat()
+        functionFormat.setFontItalic(True)
+        functionFormat.setForeground(Qt.blue)
+        self.highlightingRules.append((QRegExp("\\b[A-Za-z0-9_]+(?=\\()"),
+                functionFormat))
+        self.commentStartExpression = QRegExp("/\\*")
+        self.commentEndExpression = QRegExp("\\*/")
+
+    def highlightBlock(self, text):
+        for pattern, format in self.highlightingRules:
+            expression = QRegExp(pattern)
+            index = expression.indexIn(text)
+            while index >= 0:
+                length = expression.matchedLength()
+                self.setFormat(index, length, format)
+                index = expression.indexIn(text, index + length)
+
+        self.setCurrentBlockState(0)
+
+        startIndex = 0
+        if self.previousBlockState() != 1:
+            startIndex = self.commentStartExpression.indexIn(text)
+
+        while startIndex >= 0:
+            endIndex = self.commentEndExpression.indexIn(text, startIndex)
+
+            if endIndex == -1:
+                self.setCurrentBlockState(1)
+                commentLength = len(text) - startIndex
+            else:
+                commentLength = endIndex - startIndex + self.commentEndExpression.matchedLength()
+
+            self.setFormat(startIndex, commentLength,
+                    self.multiLineCommentFormat)
+            startIndex = self.commentStartExpression.indexIn(text,
+                    startIndex + commentLength)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
