@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>img/24x24/python-icon.png</file>
+    <file>img/24x24/python-icon-help.png</file>
     <file>img/24x24/Zoom.png</file>
     <file>img/24x24/Yes.png</file>
     <file>img/24x24/Wrench.png</file>

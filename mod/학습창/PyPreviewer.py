@@ -52,18 +52,8 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.actionFile_Save.triggered.connect(self.clickAction_fileSave)
         self.actionFile_Save_as.triggered.connect(self.clickAction_fileSaveAs)
         self.action_example.triggered.connect(self.clickAction_exampleOpen)
-    def open(self):
-        fileName, _ = QFileDialog.getOpenFileName(self)
-        if fileName:
-            fd = QFile(fileName)
-            if not fd.open(QIODevice.ReadOnly):
-                QMessageBox.information(self, "Unable to open file",fd.errorString())
-                return
+        self.actionPythonHelp.triggered.connect(self.clickAction_PythonHelp)
 
-            output = QTextStream(fd).readAll()
-
-            # Display contents.
-            self.centralWidget.plainTextEdit.setPlainText(output)
     def setDirty(self):
         #'On change of text in textEdit window, set the flag "dirty" to True''
         if self.dirty:
@@ -162,6 +152,14 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         text = str(self.process.readAllStandardError(), "utf-8")
         print(text.strip())
         self.append_plainTextEdit_3(text)
+
+    def clickAction_PythonHelp(self):
+        temppath=os.path.abspath('..')+r"\파이썬도움말\animation.py"
+        tempoption = os.path.abspath('..')+r"\파이썬도움말"
+        pythonhelp_process=QProcess()
+        pythonhelp_process.start('python', [temppath,tempoption])
+        pythonhelp_process.started()
+        #  TypeError: native Qt signal is not callable
 
 
 if __name__ == '__main__':

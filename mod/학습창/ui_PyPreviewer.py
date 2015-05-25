@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PyPreviewer.ui'
 #
-# Created: Thu May 21 12:21:57 2015
+# Created: Mon May 25 23:49:56 2015
 #      by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(750, 590)
+        MainWindow.resize(756, 732)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -512,7 +512,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.exampleView.sizePolicy().hasHeightForWidth())
         self.exampleView.setSizePolicy(sizePolicy)
-        self.exampleView.setProperty("url", QtCore.QUrl("about:blank"))
+        self.exampleView.setUrl(QtCore.QUrl("about:blank"))
         self.exampleView.setObjectName("exampleView")
         self.horizontalLayout.addWidget(self.exampleView)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
@@ -587,7 +587,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addLayout(self.horizontalLayout_4)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 750, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 756, 21))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -656,6 +656,11 @@ class Ui_MainWindow(object):
         self.actionClear = QtWidgets.QAction(MainWindow)
         self.actionClear.setIcon(icon2)
         self.actionClear.setObjectName("actionClear")
+        self.actionPythonHelp = QtWidgets.QAction(MainWindow)
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap(":/newPrefix/img/24x24/python-icon-help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionPythonHelp.setIcon(icon11)
+        self.actionPythonHelp.setObjectName("actionPythonHelp")
         self.menuFile.addAction(self.actionNew_File)
         self.menuFile.addAction(self.actionFile_Open)
         self.menuFile.addAction(self.actionFile_Save)
@@ -664,6 +669,7 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.action_example)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.action_exit)
+        self.menuHelp.addAction(self.actionPythonHelp)
         self.menuHelp.addAction(self.actionHelp)
         self.menuHelp.addAction(self.actionAbout_PyStudy)
         self.menuRun.addAction(self.actionRun)
@@ -679,6 +685,7 @@ class Ui_MainWindow(object):
         self.toolBar_2.addAction(self.actionRun)
         self.toolBar_2.addAction(self.actionStop)
         self.toolBar_2.addAction(self.actionClear)
+        self.toolBar_3.addAction(self.actionPythonHelp)
         self.toolBar_3.addAction(self.actionHelp)
         self.toolBar_3.addAction(self.actionAbout_PyStudy)
         self.toolBar_3.addAction(self.action_exit)
@@ -712,6 +719,7 @@ class Ui_MainWindow(object):
         self.action_exit.setText(_translate("MainWindow", "창 닫기"))
         self.action_example.setText(_translate("MainWindow", "예제파일 열기"))
         self.actionClear.setText(_translate("MainWindow", "실행화면 초기화"))
+        self.actionPythonHelp.setText(_translate("MainWindow", "파이썬도움말"))
 
 from PyQt5 import QtWebKitWidgets
 import imageicon_rc

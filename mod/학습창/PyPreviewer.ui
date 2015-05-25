@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>590</height>
+    <width>756</width>
+    <height>732</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -535,14 +535,14 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QWebView" name="exampleView" native="true">
+            <widget class="QWebView" name="exampleView">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="url" stdset="0">
+             <property name="url">
               <url>
                <string>about:blank</string>
               </url>
@@ -665,7 +665,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>750</width>
+     <width>756</width>
      <height>21</height>
     </rect>
    </property>
@@ -686,6 +686,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
     <property name="title">
      <string>도움말</string>
     </property>
+    <addaction name="actionPythonHelp"/>
     <addaction name="actionHelp"/>
     <addaction name="actionAbout_PyStudy"/>
    </widget>
@@ -741,6 +742,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionPythonHelp"/>
    <addaction name="actionHelp"/>
    <addaction name="actionAbout_PyStudy"/>
    <addaction name="action_exit"/>
@@ -838,6 +840,15 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
    </property>
    <property name="text">
     <string>실행화면 초기화</string>
+   </property>
+  </action>
+  <action name="actionPythonHelp">
+   <property name="icon">
+    <iconset resource="imageicon.qrc">
+     <normaloff>:/newPrefix/img/24x24/python-icon-help.png</normaloff>:/newPrefix/img/24x24/python-icon-help.png</iconset>
+   </property>
+   <property name="text">
+    <string>파이썬도움말</string>
    </property>
   </action>
  </widget>
