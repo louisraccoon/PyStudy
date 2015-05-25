@@ -50,6 +50,8 @@ from PyQt5.QtQuick import QQuickView
 from shared_rc import *
 from animation_rc import *
 
+if len(sys.argv) is 2:# 실행 옵션으로 파이썬도움말 절대경로 제공시
+    os.chdir(sys.argv[1])
 
 
 app = QGuiApplication(sys.argv)
