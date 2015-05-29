@@ -462,24 +462,17 @@ class PieView(QAbstractItemView):
 
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self,system):
         super(MainWindow, self).__init__()
 
         fileMenu = QMenu("&File", self)
-        openAction = fileMenu.addAction("&Open...")
-        openAction.setShortcut("Ctrl+O")
-        saveAction = fileMenu.addAction("&Save As...")
-        saveAction.setShortcut("Ctrl+S")
         quitAction = fileMenu.addAction("E&xit")
         quitAction.setShortcut("Ctrl+Q")
-
-
 
         self.setupModel()
         self.setupViews()
 
-        openAction.triggered.connect(self.openFile)
-        saveAction.triggered.connect(self.saveFile)
+
         quitAction.triggered.connect(QApplication.instance().quit)
 
         self.menuBar().addMenu(fileMenu)
@@ -488,7 +481,9 @@ class MainWindow(QMainWindow):
         #self.openFile(':/Charts/qtdata.cht')
         self.readDB()
 
-        self.setWindowTitle("Chart")
+        self.table.doubleClicked.connect(self.ClickAction_table)
+
+        self.setWindowTitle("PyStudy 학습진도창")
         self.resize(870, 550)
 
     def setupModel(self):
@@ -506,8 +501,6 @@ class MainWindow(QMainWindow):
         self.pieChart = PieView()
 
 
-
-
         splitter.addWidget(self.pieChart)
         splitter.addWidget(self.table)
         splitter.setStretchFactor(0, 0)
@@ -518,70 +511,12 @@ class MainWindow(QMainWindow):
 
         self.selectionModel = QItemSelectionModel(self.model2)
         self.table.setSelectionModel(self.selectionModel)
+
         #self.pieChart.setSelectionModel(self.selectionModel)
 
         #table.setColumnWidth(0,100)
-
-
-
         self.setCentralWidget(splitter)
 
-    def openFile(self, path=None):
-        if not path:
-            path, _ = QFileDialog.getOpenFileName(self, "Choose a data file",
-                    '', '*.cht')
-
-        if path:
-            f = QFile(path)
-
-            if f.open(QFile.ReadOnly | QFile.Text):
-                stream = QTextStream(f)
-
-                self.model.removeRows(0, self.model.rowCount(QModelIndex()),
-                        QModelIndex())
-
-                row = 0
-                line = stream.readLine()
-                while line:
-                    self.model.insertRows(row, 1, QModelIndex())
-
-                    pieces = line.split(',')
-                    self.model.setData(self.model.index(row, 0, QModelIndex()),
-                                pieces[0])
-                    self.model.setData(self.model.index(row, 1, QModelIndex()),
-                                float(pieces[1]))
-                    self.model.setData(self.model.index(row, 0, QModelIndex()),
-                                QColor(pieces[2]), Qt.DecorationRole)
-
-                    row += 1
-                    line = stream.readLine()
-
-                f.close()
-                self.statusBar().showMessage("Loaded %s" % path, 2000)
-
-    def saveFile(self):
-        fileName, _ = QFileDialog.getSaveFileName(self, "Save file as", '',
-                '*.cht')
-
-        if fileName:
-            f = QFile(fileName)
-
-            if f.open(QFile.WriteOnly | QFile.Text):
-                for row in range(self.model.rowCount(QModelIndex())):
-                    pieces = []
-
-                    pieces.append(self.model.data(self.model.index(row, 0, QModelIndex()),
-                            Qt.DisplayRole))
-                    pieces.append(str(self.model.data(self.model.index(row, 1, QModelIndex()),
-                            Qt.DisplayRole)))
-                    pieces.append(self.model.data(self.model.index(row, 0, QModelIndex()),
-                            Qt.DecorationRole).name())
-
-                    f.write(QByteArray(','.join(pieces)))
-                    f.write('\n')
-
-            f.close()
-            self.statusBar().showMessage("Saved %s" % fileName, 2000)
     def readDB(self):
 
         con = sqlite3.connect("mystudy.db")
@@ -626,11 +561,15 @@ class MainWindow(QMainWindow):
         self.table.setSelectionMode(QAbstractItemView.SingleSelection)
         self.table.setDragEnabled(False)
         self.table.horizontalHeader().setStretchLastSection(True)
+        self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.table.resizeRowsToContents()
         self.table.resizeColumnsToContents()
         self.table.setColumnWidth(0,350)
 
                     #self.statusBar().showMessage("Loaded %s" % path, 2000)
+    def ClickAction_table(self):
+        #self.system
+        print("click test")
 
 def generateDB():
     print("db생성")
@@ -648,6 +587,15 @@ def readDB():
     for row in cur:
         print(row)
 
+def call_sutdyPlan_interface(system):
+
+    import sys
+    app = QApplication(sys.argv)
+    window = MainWindow(system)
+    window.show()
+    #sys.exit(app.exec_())
+    app.exec()
+    print("학습진도창 종료")
 
 if __name__ == '__main__':
 
