@@ -465,23 +465,23 @@ class MainWindow(QMainWindow):
     def __init__(self,system):
         super(MainWindow, self).__init__()
 
+        self.system = system
         fileMenu = QMenu("&Menu", self)
+        dbinitAction = fileMenu.addAction("사용자 정보 초기화")
         quitAction = fileMenu.addAction("E&xit")
         quitAction.setShortcut("Ctrl+Q")
-
-        self.setupModel()
-        self.setupViews()
-
-
-        quitAction.triggered.connect(QApplication.instance().quit)
 
         self.menuBar().addMenu(fileMenu)
         self.statusBar()
 
-        #self.openFile(':/Charts/qtdata.cht')
+        dbinitAction.triggered.connect(self.ClickAction_dbinit)
+        quitAction.triggered.connect(QApplication.instance().quit)
+
+        self.setupModel()
+        self.setupViews()
         self.readDB()
 
-        self.table.doubleClicked.connect(self.ClickAction_table)
+
 
         self.setWindowTitle("PyStudy 학습진도창")
         self.resize(870, 550)
@@ -516,6 +516,7 @@ class MainWindow(QMainWindow):
 
         #table.setColumnWidth(0,100)
         self.setCentralWidget(splitter)
+        self.table.doubleClicked.connect(self.ClickAction_table)
 
     def readDB(self):
 
@@ -543,8 +544,8 @@ class MainWindow(QMainWindow):
         cur.execute("select count() from study where readcheck=1;")
         for line in cur:
             self.studyRead =line[0]
-        print("총 개수 " ,self.studyTotal ," 학습한개수", self.studyRead )
-
+        #print("총 개수 " ,self.studyTotal ," 학습한개수", self.studyRead )
+        con.close()
         row=0
         self.model2.insertRows(row, 1, QModelIndex())
         self.model2.setData(self.model2.index(row, 0, QModelIndex()),"학습")
@@ -565,11 +566,31 @@ class MainWindow(QMainWindow):
         self.table.resizeRowsToContents()
         self.table.resizeColumnsToContents()
         self.table.setColumnWidth(0,350)
-
                     #self.statusBar().showMessage("Loaded %s" % path, 2000)
-    def ClickAction_table(self):
+    def ClickAction_table(self,index):
         #self.system
-        print("click test")
+        #index.data()
+        #self.table.selectedIndexes()[0].data()
+        filepath = r"tutorial\\"+self.table.selectedIndexes()[0].data()+".html"
+        selectedRowKey = self.table.selectedIndexes()[0].row()+1#mysql 테이블 줄수 차이
+        #print("click test ",selectedRowKey )
+        con = sqlite3.connect("mystudy.db")
+        cur = con.cursor()
+        cur.execute("update 'study' set 'readcheck'=1 where key="+str(selectedRowKey)+";")
+        con.commit()
+        con.close()
+        self.setupViews()
+        self.readDB()
+
+        self.system.sendMessage("/학습창 열기 "+filepath)
+    def ClickAction_dbinit(self,index):
+        con = sqlite3.connect("mystudy.db")
+        cur = con.cursor()
+        cur.execute("update 'study' set 'readcheck'=0 ;")
+        con.commit()
+        con.close()
+        self.setupViews()
+        self.readDB()
 
 def generateDB():
     print("db생성")
@@ -579,6 +600,7 @@ def generateDB():
     cur.execute("insert into study values('chapter00 hello world', 0);")
     cur.execute("insert into study values('chapter01 한글 테스트입니다.', 0);")
     con.commit()
+    con.close()
 def readDB():
 
     con = sqlite3.connect("mystudy.db")
@@ -595,7 +617,7 @@ def call_sutdyPlan_interface(system):
     window.show()
     #sys.exit(app.exec_())
     app.exec()
-    print("학습진도창 종료")
+
 
 if __name__ == '__main__':
 

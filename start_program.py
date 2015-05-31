@@ -8,7 +8,7 @@ import multiprocessing
 from common_func import *
 
 ###################################################
-#  greencat ver.0.1   modified day 3/26
+#  greencat ver.0.2   modified day 5/31
 ###################################################
 
 class Main_Process:

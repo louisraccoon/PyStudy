@@ -23,10 +23,22 @@ def mainfunction(system):
     temppath=os.getcwd()+runFileName
     while 1:
         message = system.receiveMessage()
-        if message =="실행":
+        if(message.find(' ') != -1 ):
+            command, value = message.split(' ', 1)
+        else:
+            command = message
+            value =''
+        print(command)
+        if command =="실행":
             system.printMessage(modulefoldername+"모듈이 실행되었습니다.")
             mypreviewer_process=QProcess()
+            print(temppath)
             mypreviewer_process.start('python', [temppath])
+        elif command =="열기":
+            print(value)
+            system.printMessage(modulefoldername+"모듈이 실행되었습니다.")
+            mypreviewer_process=QProcess()
+            mypreviewer_process.start('python', [temppath,value])
         else:
             system.printMessage(" <"+modulefoldername+"> 메시지목록 ")
             system.printMessage("------------------------------------------------")

@@ -40,6 +40,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         print('Starting process')
         #self.process.start('python', ['ExampleTest.py'])
 
+
     def createEvent(self):
         self.ProgramRunButton.clicked.connect(self.clickAction_ProgramRunButton)
         self.ProgramStopButton.clicked.connect(self.clickAction_ProgramStopButton)
@@ -82,6 +83,15 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         else:
             return
         self.updateStatus('example File opened.')
+    def clickAction_exampleDirectOpen(self,fname):
+        if not (fname == ""):
+            fname = os.getcwd()+r"\\"+fname
+            print(fname)
+            self.exampleView.setUrl(QUrl.fromLocalFile(fname))
+        else:
+            return
+        self.updateStatus('example File opened.')
+
 
 
     def clickAction_fileNew(self):
@@ -100,6 +110,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
             return
         self.clearDirty()
         self.updateStatus('File opened.')
+
 
     def clickAction_fileSave(self):
         if self.fileName is None:
@@ -248,7 +259,11 @@ class Highlighter(QSyntaxHighlighter):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    mainWindow = MainWindow()
+    if len(sys.argv) is 1:
+        mainWindow = MainWindow()
+    elif len(sys.argv) is 2:
+        mainWindow = MainWindow()
+        mainWindow.clickAction_exampleDirectOpen(sys.argv[1])
     mainWindow.show()
     sys.exit(app.exec_())
 
