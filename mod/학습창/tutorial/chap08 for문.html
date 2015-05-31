@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>무제 문서</title>
+</head>
+
+<body bgcolor="white">
+<p><img src="img/파이썬.jpg" width="381" height="133" alt=""/>
+</p>
+<p><strong>chapter08 - for문에 대해 알아보자</strong><br>
+파이썬의 특징을 가장 잘 대변해주는 것이 바로 이 for문이다.<br> 
+for문은 매우 유용하고 사용할 때 문장 구조가 한눈에 들어오며<br> 
+이것을 잘만 쓰면 프로그래밍이 즐겁기까지 하다.<br>
+<br>
+<strong>(1) for문의 기본구조</strong><br>
+<img src="img/chap8_그림1.jpg" width="260" height="80" alt=""/><br>
+리스트의 첫 번째 요소부터 마지막 요소까지 차례로 변수에 대입해서<br>
+수행할 문장1, 수행할 문장2 등을 수행한다.
+<pre><code class="python">#예제8.1
+test_list = ['one', 'two', 'three'] 
+for i in test_list: 
+	print(i)
+</code>
+<img src="img/chap8_그림2.jpg" width="112" height="49" alt=""/> <br>
+#예제8.2
+"총 5명의 학생이 시험을 보았는 데 시험점수가 60점이 넘으면 합격,
+그렇지 않으면 불합격이다. 합격인지 불합격인지 보여줘라"
+
+marks = [90, 25, 67, 45, 80]
+
+number = 0 
+for mark in marks: 
+    number = number +1 
+    if mark >= 60: 
+        print("%d번 학생은 합격입니다." % number)
+    else: 
+        print("%d번 학생은 불합격입니다." % number)<br>
+<img src="img/chap8_그림3.jpg" width="171" height="84" alt=""/><br>
+각각의 학생에게 번호를 붙이기 위해서 number라는 변수를 이용하였다. 
+점수 리스트인 marks에서 차례로 점수를 꺼내어 mark라는 변수에 대입하고 for안의 문장들을 수행하게 된다. 
+우선 for문이 한번씩 수행될 때마다 
+number는 1씩 증가하고 mark가 60이상이면 합격 메시지를 출력하고 
+60을 넘지 않으면 불합격 메시지를 출력한다.
+</pre>
+
+<strong>(3)for와 continue</strong><br>
+while문에서 알아보았던 continue가 for문에서도 역시 동일하게 적용이 된다.<br> 
+즉, for문 안의 문장을 수행하는 도중에 continue문을 만나면 for문의 처음으로 돌아가게 된다.<br>
+위의 예제를 그대로 이용해서 60점 이상인 사람에게는 축하 메시지를 보내고<br> 
+나머지 사람에게는 아무런 메시지도 전하지 않는 프로그램을 만들어 보자.<br>
+<pre><code class ="python">
+#예제8.3
+marks = [90, 25, 67, 45, 80]
+
+number = 0 
+for mark in marks: 
+    number = number +1 
+    if mark < 60: continue 
+    print("%d번 학생 축하합니다. 합격입니다. " % number)<br>
+<img src="img/chap8_그림4.jpg" width="221" height="51" alt=""/>
+</code>
+</pre>
+<strong>(4)for와 range함수</strong><br>
+for문은 range라는 숫자 리스트를 자동으로 만들어 주는 함수와 함께 사용되는 경우가 많다.<br> 
+다음은 range함수의 간단한 사용법이다.<br>
+<img src="img/chap8_그림5.jpg" width="140" height="70" alt=""/><br>
+<br>
+for와 range를 이용하면 1부터 10까지 더하는 것을 다음과 같이 쉽게 구현할 수 있다.<br>
+<img src="img/chap8_그림6.jpg" width="201" height="121" alt=""/><br>
+<br>
+다양한 for문 사용<br>
+<img src="img/chap8_그림7.jpg" width="223" height="137" alt=""/><br>
+위의 예는 a리스트의 요소 값이 터플이기 때문에<br>
+각각의 요소들이 자동으로 (first, last)라는 변수에 대입되게 된다.<br>
+</p>
+</body>
+</html>
