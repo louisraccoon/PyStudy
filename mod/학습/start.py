@@ -25,7 +25,7 @@ def mainfunction(system):
     while 1:
         message = system.receiveMessage()
         if message =="시작":
-            #system.printMessage(modulefoldername+"모듈이 실행되었습니다.")
+            system.printMessage(modulefoldername+"모듈이 실행되었습니다.")
             #mypreviewer_process=QProcess()
             #mypreviewer_process.start('python', [temppath])
             call_sutdyPlan_interface(system)
