@@ -45,6 +45,9 @@ class Chat_interface_tkinter():
         # graphic user interface
         #------------------------------------------------------------------------#
 
+        self.textHistory = []
+        self.textHistoryIndex = 0
+
         #Create a window
         self.root = Tk()
         self.root.title("PyStudy console")
@@ -69,6 +72,7 @@ class Chat_interface_tkinter():
         self.EntryBox = Text(self.root, bd=0, bg="white",width="29", height="5", font="Arial")
         self.EntryBox.bind("<Return>", self.DisableEntry)
         self.EntryBox.bind("<KeyRelease-Return>", self.PressSendAction)
+        self.EntryBox.bind("<KeyPress>", self.eventKeyPressEntrybox)
 
         #Place all components on the screen
         self.scrollbar.place(x=376,y=6, height=386)
@@ -86,7 +90,10 @@ class Chat_interface_tkinter():
     #------------------------------------------------------------------------#
     def ClickSendAction(self):
         #Write message to chat window
+
         EntryText = FilteredMessage(self.EntryBox.get("0.0",END))
+        self.textHistoryIndex = len(EntryText)
+        self.textHistory.append(EntryText[:len(EntryText)-1])
         self.InputUserChat(EntryText)
         #Scroll to the bottom of chat windows
         self.ChatLog.yview(END)
@@ -129,6 +136,7 @@ class Chat_interface_tkinter():
                 self.ChatLog.tag_config("You", foreground="#FF8000", font=("Arial", 12, "bold"))
                 self.ChatLog.config(state=DISABLED)
                 self.ChatLog.yview(END)
+
                 self.sendMessage("/UserInput "+EntryText)
     def InputSystemChat(self, EntryText):
         if EntryText != '':
@@ -140,6 +148,27 @@ class Chat_interface_tkinter():
                 self.ChatLog.tag_config("System", foreground="#2E2EFE", font=("Arial", 12, "bold"))
                 self.ChatLog.config(state=DISABLED)
                 self.ChatLog.yview(END)
+    def eventKeyPressEntrybox(self,event):
+        if event.keysym == 'Up':
+            if len(self.textHistory) != 0 :
+                self.textHistoryIndex += 1
+                if self.textHistoryIndex == len(self.textHistory):
+                    self.textHistoryIndex = 0
+                self.EntryBox.delete("0.0",END)
+                self.EntryBox.insert(END, self.textHistory[self.textHistoryIndex])
+                print(" event kp_up ")
+
+        elif event.keysym == 'Down':
+            if len(self.textHistory) != 0 :
+                if self.textHistoryIndex == 0:
+                    self.textHistoryIndex = len(self.textHistory)-1
+                else:
+                    self.textHistoryIndex -= 1
+                self.EntryBox.delete("0.0",END)
+                self.EntryBox.insert(END, self.textHistory[self.textHistoryIndex])
+                print(" event kp_down ")
+                print("texthistoryindex : %d"  % self.textHistoryIndex)
+
     def __del__(self):
         self.sendMessage("/programExit ")
 
