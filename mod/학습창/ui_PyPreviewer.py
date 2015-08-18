@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PyPreviewer.ui'
 #
-# Created: Mon May 25 23:49:56 2015
+# Created: Tue Aug 18 18:07:37 2015
 #      by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -512,7 +512,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.exampleView.sizePolicy().hasHeightForWidth())
         self.exampleView.setSizePolicy(sizePolicy)
-        self.exampleView.setUrl(QtCore.QUrl("about:blank"))
+        self.exampleView.setProperty("url", QtCore.QUrl("about:blank"))
         self.exampleView.setObjectName("exampleView")
         self.horizontalLayout.addWidget(self.exampleView)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
@@ -557,8 +557,26 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.plainTextEdit_3.sizePolicy().hasHeightForWidth())
         self.plainTextEdit_3.setSizePolicy(sizePolicy)
+        self.plainTextEdit_3.setReadOnly(True)
         self.plainTextEdit_3.setObjectName("plainTextEdit_3")
         self.verticalLayout_4.addWidget(self.plainTextEdit_3)
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setSpacing(3)
+        self.horizontalLayout_7.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.messagelineEdit = QtWidgets.QLineEdit(self.previewerBox_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.messagelineEdit.sizePolicy().hasHeightForWidth())
+        self.messagelineEdit.setSizePolicy(sizePolicy)
+        self.messagelineEdit.setObjectName("messagelineEdit")
+        self.horizontalLayout_7.addWidget(self.messagelineEdit)
+        self.MessagepushButton = QtWidgets.QPushButton(self.previewerBox_2)
+        self.MessagepushButton.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.MessagepushButton.setObjectName("MessagepushButton")
+        self.horizontalLayout_7.addWidget(self.MessagepushButton)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_7)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -699,6 +717,7 @@ class Ui_MainWindow(object):
         self.editorBox.setTitle(_translate("MainWindow", "예제"))
         self.previewerBox.setTitle(_translate("MainWindow", "소스 편집창"))
         self.previewerBox_2.setTitle(_translate("MainWindow", "프로그램실행창"))
+        self.MessagepushButton.setText(_translate("MainWindow", "입력"))
         self.ProgramRunButton.setText(_translate("MainWindow", "실행"))
         self.ProgramStopButton.setText(_translate("MainWindow", "정지"))
         self.ClearButton.setText(_translate("MainWindow", "실행화면 초기화"))

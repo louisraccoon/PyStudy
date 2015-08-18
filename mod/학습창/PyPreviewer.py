@@ -3,9 +3,9 @@ import sys
 import os
 import codecs
 import binascii
-from PyQt5.QtCore import QFile, QIODevice, QTextStream, QProcess, QUrl, QRegExp, Qt
+from PyQt5.QtCore import QFile, QIODevice, QTextStream, QProcess, QUrl, QRegExp, Qt,QByteArray
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog, QInputDialog,QMainWindow, QMessageBox, QWidget)
+from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog, QInputDialog,QMainWindow, QMessageBox, QWidget, QPlainTextEdit)
 
 from ui_PyPreviewer import Ui_MainWindow
 
@@ -19,20 +19,25 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         #self.centralWidget = PyPreviewer(self)
         #self.setCentralWidget(self.centralWidget)
         self.setupEditor()
+
+
         #메뉴 이벤트 생성
         self.createEvent()
 
         self.dirty = False
         self.plainTextEdit_2.textChanged.connect(self.setDirty)
-
         self.fileName = None
+
+
 
         self.exampleView.load(QUrl("http://www.google.com"))
 
         #사용자 입력 파이썬 파일 실행
         print ('Connecting process')
         self.process = QProcess(self)
-        self.process.setProcessChannelMode(QProcess.MergedChannels)
+        self.process.setProcessChannelMode(QProcess.SeparateChannels)
+        self.process.setInputChannelMode(QProcess.ManagedInputChannel)
+
         self.process.readyReadStandardOutput.connect(self.stdoutReady)
         self.process.readyReadStandardError.connect(self.stderrReady)
         self.process.started.connect(lambda: print('ExampleProgramStarted!'))
@@ -54,6 +59,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.actionFile_Save_as.triggered.connect(self.clickAction_fileSaveAs)
         self.action_example.triggered.connect(self.clickAction_exampleOpen)
         self.actionPythonHelp.triggered.connect(self.clickAction_PythonHelp)
+        self.MessagepushButton.clicked.connect(self.clickAction_MessagePushButton)
 
     def setDirty(self):
         #'On change of text in textEdit window, set the flag "dirty" to True''
@@ -142,7 +148,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
             self.clearDirty()
     def clickAction_ProgramRunButton(self):
         self.clickAction_fileSave()
-        self.process.start('python', [self.fileName])
+        self.process.start('python', [self.fileName],QIODevice.ReadWrite)
     def clickAction_ProgramStopButton(self):
         self.process.kill()
         self.append_plainTextEdit_3("\n\n프로세스 정지 with exit code "+str(self.process.exitCode())+"\n\n")
@@ -156,12 +162,10 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 
     def stdoutReady(self):
         text = str(self.process.readAllStandardOutput(), "utf-8")
-        print(text.strip())
         self.append_plainTextEdit_3(text)
 
     def stderrReady(self):
         text = str(self.process.readAllStandardError(), "utf-8")
-        print(text.strip())
         self.append_plainTextEdit_3(text)
 
     def clickAction_PythonHelp(self):
@@ -171,7 +175,16 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         pythonhelp_process.start('python', [temppath,tempoption])
         pythonhelp_process.started()
         #  TypeError: native Qt signal is not callable
-
+    def clickAction_MessagePushButton(self):
+        temp = self.messagelineEdit.text()
+        self.append_plainTextEdit_3(temp)
+        self.append_plainTextEdit_3("\n")
+        bArray = QByteArray()
+        bArray.append(temp)
+        bArray.append("\n")
+        if( self.process.write(bArray) == -1):
+            print("chlidprocess write error")
+        self.messagelineEdit.clear()
     def setupEditor(self):
         font = QFont()
         font.setFamily('Courier')
@@ -180,7 +193,6 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 
         self.editor = self.plainTextEdit_2
         self.editor.setFont(font)
-
         self.highlighter = Highlighter(self.editor.document())
 
 class Highlighter(QSyntaxHighlighter):
@@ -256,6 +268,7 @@ class Highlighter(QSyntaxHighlighter):
                     self.multiLineCommentFormat)
             startIndex = self.commentStartExpression.indexIn(text,
                     startIndex + commentLength)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
