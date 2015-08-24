@@ -92,7 +92,7 @@ class Chat_interface_tkinter():
         #Write message to chat window
 
         EntryText = FilteredMessage(self.EntryBox.get("0.0",END))
-        self.textHistoryIndex = len(EntryText)
+        self.textHistoryIndex = 0
         self.textHistory.append(EntryText[:len(EntryText)-1])
         self.InputUserChat(EntryText)
         #Scroll to the bottom of chat windows
@@ -151,13 +151,16 @@ class Chat_interface_tkinter():
     def eventKeyPressEntrybox(self,event):
         if event.keysym == 'Up':
             if len(self.textHistory) != 0 :
-                self.textHistoryIndex += 1
-                if self.textHistoryIndex == len(self.textHistory):
+
+                if self.textHistoryIndex == len(self.textHistory)-1:
                     self.textHistoryIndex = 0
+                else:
+                    self.textHistoryIndex += 1
+
                 self.EntryBox.delete("0.0",END)
                 self.EntryBox.insert(END, self.textHistory[self.textHistoryIndex])
                 print(" event kp_up ")
-
+                print("texthistoryindex : %d"  % self.textHistoryIndex)
         elif event.keysym == 'Down':
             if len(self.textHistory) != 0 :
                 if self.textHistoryIndex == 0:
