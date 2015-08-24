@@ -49,7 +49,22 @@ Rectangle {
  color: "white"
  
 Text {
- text: "Hello World\n\테스트1\n\n\n테스트2"
- anchors.centerIn: parent
+ text: " <파일 입출력>
+ 파일 객체 = open(file, mode)\n
+
+ 예) 파일 쓰기
+ file = open('t.txt', 'w')\n
+ file.write('file write test')\n
+ file.close()\n
+
+ 예) 파일 읽기\n
+ file = open('test.txt','r')\n
+ line = file.readline()\n
+ while line:\n
+     print line,\n
+     line = f.readline()\n
+ file.close()\n
+
+ "
  }
 }

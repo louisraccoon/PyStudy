@@ -49,6 +49,18 @@ Rectangle {
  color: "white"
  
 Text {
- text: "Hello World\n\테스트1\n\n\n테스트2"
+ text: "클래스 \n
+ 클래스란 간단하게 설명하면 변수와 함수를 \n
+ 모아넣은 것이라고 할 수 있습니다.\n
+
+ 예)
+ class Student:\n
+    name = \"김철수\"\n
+    def info(self):\n
+        print(\"제 이름은 \" + self.name +\"입니다.\")\n
+ inst = Student()\n
+ inst.name\n
+ inst.info()\n
+ "
  }
 }

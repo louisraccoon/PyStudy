@@ -49,7 +49,22 @@ Rectangle {
  color: "white"
  
 Text {
- text: "Hello World\n\테스트1\n\n\n테스트2"
- anchors.centerIn: parent
+ text: "연산자 오버로딩\n
+ 연산자 오버로딩이란\n
+ 인스턴스 객체끼리 서로 연산을 할수 있게끔\n
+ 기존에 있는 연산자의 기능을 바꾸어 중복으로\n
+ 정의하는 것을 말합니다.\n
+
+ 예)
+ class NumBox:\n
+    def _init_(self,num):\n
+        self.Num = num\n
+    def _add_(self,num):\n
+        self.Num += num\n
+    def _sub_(self,num):\n
+        self.Num -= num\n
+ 파이썬에서는 인스턴스 객체의 연산을 위해 여러가지\n
+ 연산자를 미리 정의해둡니다.\n
+ "
  }
 }

@@ -50,13 +50,15 @@ Rectangle {
  
 Text {
  text: " 함수\n
+ 문법)\n
  def<함수명>(인자1,인자2,인자3...):\n
- <구문>\n
- return<반환값>\n
+    <구문>\n
+    return<반환값>\n
  이것이 기본골격이다.\n\n
- 예를 들어 \n
+
+ 예) \n
  def love(girl,boy):\n
- return girl+boy\n
+    return girl+boy\n
  이라고 하고\n
  love(1,2)을 쓰면 1+2가 반환되어 3이된다."
 

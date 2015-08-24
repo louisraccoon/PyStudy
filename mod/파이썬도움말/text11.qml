@@ -49,7 +49,20 @@ Rectangle {
  color: "white"
  
 Text {
- text: "Hello World\n\테스트1\n\n\n테스트2"
- anchors.centerIn: parent
+ text: "예외처리
+ 실행 도중에 에러가 발생해도 예외를 무시하거나\n
+ 따로 처리할 수 있도록 try와 except를 지원합니다.\n
+
+ try:
+  예외를 유발할 수 있는 구문
+ except <예외종류>:
+  예외 처리를 수행하는 구문
+
+예)
+ try:
+  a = 10/0
+ except ZeroDivisionError:
+  print('제수는 0이 될 수 없습니다!')
+ "
  }
 }

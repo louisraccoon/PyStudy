@@ -49,7 +49,18 @@ Rectangle {
  color: "white"
  
 Text {
- text: "Hello World\n\테스트1\n\n\n테스트2"
- anchors.centerIn: parent
+ text: "모듈\n
+ 모듈이란\n
+ 변수,클래스,함수 등과 같은 여러 코드를 한곳에
+ 모아놓은 코드의 모음이라고 할 수 있습니다.
+ 모듈을 만들어 놓으면 코드의 재사용성을 극대화
+ 시킬수 있습니다.\n
+
+ 예)
+ import math\n
+ dir(math)\n
+ 이처럼 미리 내장된 math라는 모듈을 불러서 dir를
+ 하면 내장된 데이터와 함수를 알아낼 수 있습니다.\n
+ "
  }
 }

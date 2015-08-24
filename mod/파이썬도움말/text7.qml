@@ -49,7 +49,23 @@ Rectangle {
  color: "white"
  
 Text {
- text: "Hello World\n\테스트1\n\n\n테스트2"
- anchors.centerIn: parent
+ text: "상속\n
+ 상속이란 부모 클래스의 멤버를 자식 클래스가 물려받을
+ 수 있습니다.\n
+
+ 예)
+ class Person:\n
+    def _init_(self,name):\n
+        self.Name = name\n
+    def aboutMe(self):\n
+        print(\"저의 이름은 \" +self.Name+ \"입니다.\")\n\n
+
+ class Employee(Person):\n
+    def _intit_(self,name):\n
+        Person,_intit_(self, name)\n
+        self.Salary = salary\n
+    def aboutMe(self):\n
+        Person.aboutMe(self)
+ "
  }
 }

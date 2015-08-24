@@ -49,7 +49,16 @@ Rectangle {
  color: "white"
  
 Text {
- text: "Hello World\n\테스트1\n\n\n테스트2"
- anchors.centerIn: parent
+ text: "생성자/소멸자\n
+ 생성자란 객체를 생성할 때 호풀되는 함수로써,\n
+ 객체 생성 시 초기화 작업을 위해 존재합니다.\n
+
+문법)
+ class 클래스명:\n
+    def _init_(self):\n
+        생성자 관련 함수들\n
+    def _del_(self):\n
+        소멸자 관련 함수들\n
+ "
  }
 }
