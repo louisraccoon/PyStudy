@@ -60,7 +60,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.action_example.triggered.connect(self.clickAction_exampleOpen)
         self.actionPythonHelp.triggered.connect(self.clickAction_PythonHelp)
         self.MessagepushButton.clicked.connect(self.clickAction_MessagePushButton)
-
+        self.actionStyleSheet_default.triggered.connect(self.clickAction_styleDefault)
+        self.actionStyleSheet_Black.triggered.connect(self.clickAction_styleBlack)
+        self.actionStyleSheet_Load.triggered.connect(self.clickAction_styleLoad)
     def setDirty(self):
         #'On change of text in textEdit window, set the flag "dirty" to True''
         if self.dirty:
@@ -97,8 +99,6 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         else:
             return
         self.updateStatus('example File opened.')
-
-
 
     def clickAction_fileNew(self):
         #'''Clear the editor window for a new file with name specified in fileSaveAs method.'''
@@ -185,6 +185,27 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         if( self.process.write(bArray) == -1):
             print("chlidprocess write error")
         self.messagelineEdit.clear()
+    def clickAction_styleLoad(self):
+        fname, filter = QFileDialog.getOpenFileName(self, "QT스타일시트파일 불러오기", '.', "Qt-StyleSheet(*.qss)")
+        if fname:
+            file = QFile(fname)
+            file.open(QFile.ReadOnly)
+            styleSheet = file.readAll()
+            styleSheet = str(styleSheet, encoding='utf8') # Python v3.
+            self.setStyleSheet(styleSheet)
+            print ("test")
+    def clickAction_styleDefault(self):
+        self.set_StyleSheet("default")
+    def clickAction_styleBlack(self):
+        self.set_StyleSheet("black")
+    def set_StyleSheet(self, sheetName):
+        if sheetName:
+            file = QFile('stylesheet/%s.qss' % sheetName.lower())
+            file.open(QFile.ReadOnly)
+            styleSheet = file.readAll()
+            styleSheet = str(styleSheet, encoding='utf8') # Python v3.
+            self.setStyleSheet(styleSheet)
+
     def setupEditor(self):
         font = QFont()
         font.setFamily('Courier')
