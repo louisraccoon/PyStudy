@@ -3,9 +3,11 @@ import sys
 import os
 import codecs
 import binascii
+import time
+
 from PyQt5.QtCore import QFile, QIODevice, QTextStream, QProcess, QUrl, QRegExp, Qt,QByteArray
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog, QInputDialog,QMainWindow, QMessageBox, QWidget, QPlainTextEdit)
+from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog, QInputDialog,QMainWindow, QMessageBox, QWidget, QPlainTextEdit, QSplashScreen)
 
 from ui_PyPreviewer import Ui_MainWindow
 
@@ -14,6 +16,9 @@ from ui_PyPreviewer import Ui_MainWindow
 class MainWindow(QMainWindow,Ui_MainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+
+        self.start_logo()
+
         self.setupUi(self)
 
         #self.centralWidget = PyPreviewer(self)
@@ -45,7 +50,19 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         print('Starting process')
         #self.process.start('python', ['ExampleTest.py'])
 
-
+    def start_logo(self):
+        img_logo = QPixmap('pystudylogo.png')
+        self.splash = QSplashScreen(img_logo, Qt.WindowStaysOnTopHint)
+        self.splash.setMask(img_logo.mask())
+        self.splash.show()
+        time.sleep(1.5)
+        self.splash.close()
+    def show_logo(self):
+        img_logo = QPixmap('pystudylogo.png')
+        self.splash = QSplashScreen(img_logo, Qt.WindowStaysOnTopHint)
+        self.splash.setMask(img_logo.mask())
+        self.splash.show()
+        self.splash.repaint()
     def createEvent(self):
         self.ProgramRunButton.clicked.connect(self.clickAction_ProgramRunButton)
         self.ProgramStopButton.clicked.connect(self.clickAction_ProgramStopButton)
@@ -63,6 +80,8 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.actionStyleSheet_default.triggered.connect(self.clickAction_styleDefault)
         self.actionStyleSheet_Black.triggered.connect(self.clickAction_styleBlack)
         self.actionStyleSheet_Load.triggered.connect(self.clickAction_styleLoad)
+        self.actionAbout_PyStudy.triggered.connect(self.show_logo)
+        self.action_exit.triggered.connect(self.close)
     def setDirty(self):
         #'On change of text in textEdit window, set the flag "dirty" to True''
         if self.dirty:
