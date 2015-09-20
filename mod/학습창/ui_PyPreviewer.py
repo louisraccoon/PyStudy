@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PyPreviewer.ui'
 #
-# Created: Thu Sep 17 18:44:38 2015
+# Created: Sun Sep 20 14:39:23 2015
 #      by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!

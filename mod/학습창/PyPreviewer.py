@@ -7,7 +7,7 @@ import time
 
 from PyQt5.QtCore import QFile, QIODevice, QTextStream, QProcess, QUrl, QRegExp, Qt,QByteArray
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog,QSizePolicy, QLineEdit,QInputDialog,QMainWindow, QMessageBox, QWidget, QPlainTextEdit, QSplashScreen)
+from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog,QSizePolicy, QLineEdit,QInputDialog,QToolBar,QMainWindow, QMessageBox, QWidget, QPlainTextEdit, QSplashScreen)
 from PyQt5.QtWebKitWidgets import QWebPage, QWebView
 from ui_PyPreviewer import Ui_MainWindow
 
@@ -41,9 +41,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
                 self.locationEdit.sizePolicy().verticalPolicy())
         self.locationEdit.returnPressed.connect(self.changeLocation)
 
-
-        toolBar = self.addToolBar("Navigation")
-
+        toolBar = QToolBar()
+        self.addToolBar(toolBar)
+        self.insertToolBarBreak(toolBar)
         toolBar.addAction(self.exampleView.pageAction(QWebPage.Back))
         toolBar.addAction(self.exampleView.pageAction(QWebPage.Forward))
         toolBar.addAction(self.action_myHome)
