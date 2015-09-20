@@ -7,8 +7,8 @@ import time
 
 from PyQt5.QtCore import QFile, QIODevice, QTextStream, QProcess, QUrl, QRegExp, Qt,QByteArray
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog, QInputDialog,QMainWindow, QMessageBox, QWidget, QPlainTextEdit, QSplashScreen)
-
+from PyQt5.QtWidgets import (QAction, QApplication, QFileDialog,QSizePolicy, QLineEdit,QInputDialog,QMainWindow, QMessageBox, QWidget, QPlainTextEdit, QSplashScreen)
+from PyQt5.QtWebKitWidgets import QWebPage, QWebView
 from ui_PyPreviewer import Ui_MainWindow
 
 
@@ -34,8 +34,24 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.fileName = None
 
 
-
+        #web view
         self.exampleView.load(QUrl("http://www.google.com"))
+        self.locationEdit = QLineEdit(self)
+        self.locationEdit.setSizePolicy(QSizePolicy.Expanding,
+                self.locationEdit.sizePolicy().verticalPolicy())
+        self.locationEdit.returnPressed.connect(self.changeLocation)
+
+
+        toolBar = self.addToolBar("Navigation")
+
+        toolBar.addAction(self.exampleView.pageAction(QWebPage.Back))
+        toolBar.addAction(self.exampleView.pageAction(QWebPage.Forward))
+        toolBar.addAction(self.action_myHome)
+        toolBar.addAction(self.exampleView.pageAction(QWebPage.Reload))
+        #toolBar.addAction(self.exampleView.pageAction(QWebPage.Stop))
+        toolBar.addWidget(self.locationEdit)
+
+
 
         #사용자 입력 파이썬 파일 실행
         print ('Connecting process')
@@ -81,6 +97,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.actionStyleSheet_Black.triggered.connect(self.clickAction_styleBlack)
         self.actionStyleSheet_Load.triggered.connect(self.clickAction_styleLoad)
         self.actionAbout_PyStudy.triggered.connect(self.show_logo)
+        self.action_myHome.triggered.connect(self.go_myHome)
         self.action_exit.triggered.connect(self.close)
     def setDirty(self):
         #'On change of text in textEdit window, set the flag "dirty" to True''
@@ -234,6 +251,14 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.editor = self.plainTextEdit_2
         self.editor.setFont(font)
         self.highlighter = Highlighter(self.editor.document())
+
+    def changeLocation(self):
+        url = QUrl.fromUserInput(self.locationEdit.text())
+        self.exampleView.load(url)
+        self.exampleView.setFocus()
+    def go_myHome(self):
+        self.exampleView.load(QUrl("http://www.google.com"))
+        self.exampleView.setFocus()
 
 class Highlighter(QSyntaxHighlighter):
     def __init__(self, parent=None):

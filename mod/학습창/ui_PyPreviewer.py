@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PyPreviewer.ui'
 #
-# Created: Thu Sep 10 15:58:23 2015
+# Created: Thu Sep 17 18:44:38 2015
 #      by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -246,11 +246,17 @@ class Ui_MainWindow(object):
         self.actionStyleSheet_Black.setObjectName("actionStyleSheet_Black")
         self.actionStyleSheet_Load = QtWidgets.QAction(MainWindow)
         self.actionStyleSheet_Load.setObjectName("actionStyleSheet_Load")
+        self.action_myHome = QtWidgets.QAction(MainWindow)
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap(":/newPrefix/img/24x24/Home.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.action_myHome.setIcon(icon12)
+        self.action_myHome.setObjectName("action_myHome")
         self.menuFile.addAction(self.actionNew_File)
         self.menuFile.addAction(self.actionFile_Open)
         self.menuFile.addAction(self.actionFile_Save)
         self.menuFile.addAction(self.actionFile_Save_as)
         self.menuFile.addSeparator()
+        self.menuFile.addAction(self.action_myHome)
         self.menuFile.addAction(self.action_example)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.action_exit)
@@ -271,6 +277,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionNew_File)
         self.toolBar.addAction(self.actionFile_Open)
         self.toolBar.addAction(self.actionFile_Save)
+        self.toolBar.addSeparator()
         self.toolBar.addAction(self.action_example)
         self.toolBar_2.addAction(self.actionRun)
         self.toolBar_2.addAction(self.actionStop)
@@ -314,6 +321,7 @@ class Ui_MainWindow(object):
         self.actionStyleSheet_default.setText(_translate("MainWindow", "default"))
         self.actionStyleSheet_Black.setText(_translate("MainWindow", "black"))
         self.actionStyleSheet_Load.setText(_translate("MainWindow", "스타일시트불러오기"))
+        self.action_myHome.setText(_translate("MainWindow", "학습홈 바로가기"))
 
 from PyQt5 import QtWebKitWidgets
 import imageicon_rc

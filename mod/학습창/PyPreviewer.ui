@@ -293,6 +293,7 @@
     <addaction name="actionFile_Save"/>
     <addaction name="actionFile_Save_as"/>
     <addaction name="separator"/>
+    <addaction name="action_myHome"/>
     <addaction name="action_example"/>
     <addaction name="separator"/>
     <addaction name="action_exit"/>
@@ -341,6 +342,7 @@
    <addaction name="actionNew_File"/>
    <addaction name="actionFile_Open"/>
    <addaction name="actionFile_Save"/>
+   <addaction name="separator"/>
    <addaction name="action_example"/>
   </widget>
   <widget class="QToolBar" name="toolBar_2">
@@ -489,6 +491,15 @@
   <action name="actionStyleSheet_Load">
    <property name="text">
     <string>스타일시트불러오기</string>
+   </property>
+  </action>
+  <action name="action_myHome">
+   <property name="icon">
+    <iconset resource="imageicon.qrc">
+     <normaloff>:/newPrefix/img/24x24/Home.png</normaloff>:/newPrefix/img/24x24/Home.png</iconset>
+   </property>
+   <property name="text">
+    <string>학습홈 바로가기</string>
    </property>
   </action>
  </widget>
