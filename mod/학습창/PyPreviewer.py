@@ -25,6 +25,8 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         #self.setCentralWidget(self.centralWidget)
         self.setupEditor()
 
+        self.setWindowIcon(QIcon('PyPreviewer.ico'))
+
 
         #메뉴 이벤트 생성
         self.createEvent()
@@ -343,6 +345,9 @@ if __name__ == '__main__':
         mainWindow = MainWindow()
         mainWindow.clickAction_exampleDirectOpen(sys.argv[1])
     mainWindow.show()
+    import ctypes
+    myappid = '파이스터디프로그램' # 반드시 유니코드가 와야됨
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     sys.exit(app.exec_())
 
 
