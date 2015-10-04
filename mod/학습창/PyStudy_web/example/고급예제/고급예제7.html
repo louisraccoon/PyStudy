@@ -1,0 +1,75 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8">
+</head>
+
+<body>
+
+<div class="container container-width">
+
+<div class="content row tex2jax_ignore">
+
+
+    <div class="page col-md-9">
+            <h1 class="page-subject">
+                Lotto 자동 번호 추출
+            </h1>
+            <p>게임의 수를 입력하면 그 횟수만큼 Lotto 번호를 랜덤으로 보여준다.</p>
+
+            <h3>소스</h3>
+<p>import random</p>
+
+<p>num = int(input("lotto 게임 수를 입력하세요 : "))</p>
+
+<p>print("lotto 자동 번호 입니다.")</p>
+<p>print("----------------------")</p>
+<p># 입력한 게임 수 만큼 반복</p>
+<p>for x in range(1, num+1):</p>
+<p>    lotto = [0, 0, 0, 0, 0, 0]</p>
+
+<p>    lotto[0] = random.randrange(1, 46, 1)</p>
+
+<p>    lotto[1] = lotto[0]</p>
+<p>    lotto[2] = lotto[0]</p>
+<p>    lotto[3] = lotto[0]</p>
+<p>    lotto[4] = lotto[0]</p>
+<p>    lotto[5] = lotto[0]</p>
+
+<p>    # 중복된 수가 발생되지 않도록 채번</p>
+<p>    while (lotto[0] == lotto[1]):</p>
+<p>        lotto[1] = random.randrange(1, 46, 1)</p>
+<p>    while (lotto[0] == lotto[2] or lotto[1] == lotto[2]):</p>
+<p>        lotto[2] = random.randrange(1, 46, 1)</p>
+<p>    while (lotto[0] == lotto[3] or lotto[1] == lotto[3] or lotto[2] == lotto[3]):</p>
+<p>        lotto[3] = random.randrange(1, 46, 1)</p>
+<p>    while (lotto[0] == lotto[4] or lotto[1] == lotto[4] or lotto[2] == lotto[4] or lotto[3] == lotto[4]):</p>
+<p>        lotto[4] = random.randrange(1, 46, 1)</p>
+<p>    while (lotto[0] == lotto[5] or lotto[1] == lotto[5] or lotto[2] == lotto[5] or lotto[3] == lotto[5] or lotto[4] == lotto[5]):</p>
+   <p>     lotto[5] = random.randrange(1, 46, 1)</p>
+
+<p>    # 결과를 정렬</p>
+<p>    lotto.sort()</p>
+
+<p>    # 결과 출력</p>
+<p>    print(lotto)</p>
+
+<h3>결과</h3></p>
+<p>lotto 게임 수를 입력하세요 : 5</p>
+<p>lotto 자동 번호 입니다.</p>
+<p>----------------------</p>
+<p>[1, 18, 33, 35, 36, 39]</p>
+<p>[5, 10, 11, 16, 18, 26]</p>
+<p>[9, 17, 19, 22, 39, 42]</p>
+<p>[4, 7, 11, 12, 17, 24]</p>
+<p>[2, 17, 19, 24, 42, 44]</p>
+
+
+</div>
+
+</div>
+<p><a href="고급예제6.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="고급예제8.html">&lt;앞으로&gt;</a></p>
+</body>
+</html>

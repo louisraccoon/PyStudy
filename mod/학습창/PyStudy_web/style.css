@@ -1,0 +1,37 @@
+﻿body { 
+	margin:0 auto;
+	padding:0;
+	color:#e2e2e2;
+	font-size:12px;
+	line-height:1.6em; 
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	background-image:  url(image/templatemo_body.jpg);
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+a, a:link, a:visited {color:#FFFFFF; font-weight:normal; text-decoration:none;}
+
+h1 {color:#fff; font-size:40px; font-weight:bold; margin:20px 10px;}
+h2 {color:#fff; font-size:24px; font-weight:normal; margin:0 0 25px; padding:0;}
+
+.section {position:relative; float:left; margin:5px 20px -20px 85px; width: 70%; background: #3c3b3b;}
+
+.row1 {width: 400px; height: 110px;}
+
+.box1 {background: #9168b3 url(image/1.png) scroll 20px 18px no-repeat;}
+.box1:hover {background-color: #7c549d;}
+
+.box2 { background: #a8b368 url(image/2.png) scroll 20px 18px no-repeat;}
+.box2:hover { background-color: #909b51;}
+
+.box3 { background: #b36c68 url(image/3.png) scroll 20px 18px no-repeat;}
+.box3:hover { background-color: #9d5652;}
+
+.box4 { background: #636363 url(image/4.png) scroll 20px 18px no-repeat;}
+.box4:hover { background-color: #4b4b4b;}
+
+.box5 { background: #413959 url(image/5.png) scroll 20px 18px no-repeat;}
+.box5:hover { background-color: #302945;}
+
+.home_box .box_with_padding { padding: 25px 15px 15px 140px;}

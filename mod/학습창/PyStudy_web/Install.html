@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			#tab {height:35px; width:100%;}
+			#tab ul li {list-style:none; color:white; background-color:#2d2d2d; float:left; line-height:35px; vertical-align:middle; text-align:center;}
+			#tab a {text-decoration:none; color:white; display:block; width:130px; font-size:13px; font-weight: bold;}
+			#tab a:hover {border-bottom:4px solid #FFD343;}
+			#tab a.active {color:#FFD343; font-size:15px; border-bottom:4px solid #FFD343;}
+
+			.contents {padding:20px 46px 0; color:rgb(30,41,51);}
+			a {text-decoration:none;}
+		</style>
+		<!--[if lt IE 9]>
+		  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<nav id="tab">
+			<ul>
+				<li><a href="Main.html">Home</a></li>
+				<li>|</li>
+				<li><a href="Introduce.html">Python 소개</a></li>
+				<li>|</li>
+				<li><a class="active" href="Install.html">Python 설치과정</a></li>
+				<li>|</li>
+				<li><a href="Example.html">학습예제</a></li>
+				<li>|</li>
+				<li><a href="Pystudy.html">Pystudy 설명서</a></li>
+				<li>|</li>
+				<li><a href="Site.html">참고 사이트</a></li>
+			</ul>
+		</nav>
+		<div class="contents">
+		<div class="container container-width">
+			<div class="content row tex2jax_ignore">
+				<div class="page col-md-9">
+					<h1 class="page-subject">Python 설치</h1>
+					<div class="page-content tex2jax_process">
+						<p>이제 파이썬이라는 언어를 갖고 놀아보고 싶은 마음이 드셨나요?</p>
+						<p>저는 공부한다는 말보다는 논다는 것이 더 마음에 드는군요. 재미있으니까요.</p>
+						<p>파이썬을 써보려면 파이썬 개발 도구가 필요합니다.</p>
+						<h2 id="_1">리눅스, 맥 환경</h2>
+						<p>리눅스나 맥을 쓰시는 분들은 파이썬이 이미 설치되어 있을 것입니다. 터미널에서 <code>python</code>이라고 쳐보세요.</p>
+<pre><code>$ python
+Python 2.7.3 (default, Sep 26 2012, 21:51:14) 
+[GCC 4.7.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt;
+</code></pre>						
+						<h2 id="_2">윈도우에서 파이썬 설치하기</h2>
+						<h3 id="_3">일반적인 설치</h3>
+						<p>Windows를 쓰시는 분들은 다음 주소에서 파이썬 설치 프로그램을 내려받으실 수 있습니다. 다양한 라이브러리를 사용하기 위해서, 64 비트 Windows 운영체제를 사용하시더라도 32 비트 용을 설치하시는 것이 좋습니다.</p>
+						<ul>
+							<li>Python 2.7.10 Windows Installer [<a href="https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi">https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi</a>]</li>
+						</ul>
+						<p>파일을 받으셨으면 바로 설치해주시면 됩니다. 특별히 건드리실 것 없이 'Next' 버튼을 계속 눌러주세요.</p>
+						<ul>
+							<li>파이썬 설치 동영상 보기 [<a href="http://www.youtube.com/watch?v=ZQRlS_f0_cQ">http://www.youtube.com/watch?v=ZQRlS_f0_cQ</a>]</li>
+						</ul>
+						<h3 id="_4">과학, 수학, 데이터 분석 목적의 배포본 설치</h3>
+						<p>과학 계산용으로 널리 사용되는 파이썬 패키지들을 쉽게 관리할 수 있는 배포본도 있습니다.</p>
+						<ul>
+							<li>Anaconda [<a href="http://continuum.io/downloads.html">http://continuum.io/downloads.html</a>]</li>
+							<li>Canopy [<a href="https://store.enthought.com/downloads">https://store.enthought.com/downloads</a>]</li>
+						</ul>
+						<blockquote>
+						<p>Anaconda나 Canopy를 설치하신 분은 하트 그리기를 따라해보세요.<br />
+						* 5.4. matplotlib으로 하트 그리기 [<a href="https://wikidocs.net/65">https://wikidocs.net/65</a>]</p>
+						</blockquote>
+						<h2 id="_5">웹브라우저에서 사용하기</h2>
+						<p>파이썬 공식 홈페이지의 첫 화면에 있는 노란색 Launch Interactive Shell 아이콘을 클릭해보세요. 아래 그림과 같은 파이썬 셸이 뜰 거예요. 버전이 3.X로 높기 때문에 2.7과는 약간 차이가 있답니다.</p>
+						<p>[<a href="http://python.org/">http://python.org</a>]</p>
+						<p><img alt="그림" src="https://wikidocs.net/images/page/44/python_org_shell.jpg" /></p>
+						<h2 id="_6">안드로이드 기기에 설치하기</h2>
+						<p>안드로이드 기기에서도 파이썬 코드를 작성하고 실행할 수 있답니다. Play 스토어에서 <a href="https://play.google.com/store/apps/details?id=com.hipipal.qpyplus">QPython</a>을 설치해보세요.</p>
+						<p><img alt="" src="https://wikidocs.net/images/page/44/playstore_qpython.png" /></p>
+					</div>
+					<p>출처 : <a href="https://wikidocs.net/44">WikiDocs</a> </p>
+				</div>
+			</div>
+		</div>
+		</div>
+	</body>
+</html>

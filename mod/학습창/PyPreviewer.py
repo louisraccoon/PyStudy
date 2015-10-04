@@ -37,7 +37,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 
 
         #web view
-        self.exampleView.load(QUrl("http://www.google.com"))
+        #self.exampleView.load(QUrl("http://www.google.com"))
+        self.startfilepath=os.getcwd() +"/PyStudy_web/Main.html"
+        self.exampleView.load(QUrl.fromLocalFile(self.startfilepath))
         self.locationEdit = QLineEdit(self)
         self.locationEdit.setSizePolicy(QSizePolicy.Expanding,
                 self.locationEdit.sizePolicy().verticalPolicy())
@@ -73,7 +75,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.splash = QSplashScreen(img_logo, Qt.WindowStaysOnTopHint)
         self.splash.setMask(img_logo.mask())
         self.splash.show()
-        time.sleep(1.5)
+        time.sleep(1.8)
         self.splash.close()
     def show_logo(self):
         img_logo = QPixmap('pystudylogo.png')
@@ -121,7 +123,6 @@ class MainWindow(QMainWindow,Ui_MainWindow):
     def clickAction_exampleOpen(self):
         fname, filter = QFileDialog.getOpenFileName(self, "예제파일 열기창", '.', "HTML File(*.html *.htm)")
         if not (fname == ""):
-            print(fname)
             #self.exampleView.load(QUrl(fname))
             self.exampleView.setUrl(QUrl.fromLocalFile(fname))
             #self.plainTextEdit_2.setPlainText(codecs.open(fname, "r", "utf-8" ).read())
@@ -259,7 +260,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.exampleView.load(url)
         self.exampleView.setFocus()
     def go_myHome(self):
-        self.exampleView.load(QUrl("http://www.google.com"))
+        self.exampleView.load(QUrl.fromLocalFile(self.startfilepath))
         self.exampleView.setFocus()
 
 class Highlighter(QSyntaxHighlighter):

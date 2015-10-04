@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta charset="utf-8">
+<style type="text/css">
+.python strong {
+	color: #00F;
+}
+</style>
+</head>
+
+<body>
+<p>
+<h1 class="page-subject">
+                자동운전 알고리즘을 통한 로봇 청소기 만들기
+            </h1>
+<p>
+  인터렉티브 셸에서 명령이나 코드만 입력하고 있으면 따분하다.
+  <br>
+이럴 때에는 파이썬으로 그림을 그리며 학습할 수가 있다.</br></p>
+<p>turtle 모듈을 사용해 거북이를 조종하는 방법을 배우면서 문법을 익히고 심화학습 할 수 있는 일석이조의 효과를 가진다.</p>
+
+<p>로봇 청소기는 벽을 만나면 방향을 바꿔서 다시 나아간다. 이와 같은 동작을 실현하려면 어떻게 해야할까?</p>
+<p><img src="11.jpg" width="699" height="615" /></p>
+<p><strong>cleaner.py</strong></p>
+<pre><code class="python">
+import turtle
+import math
+import random
+
+class Line:
+    def __init__(self, slp, x0, y0):
+        self.slp = float(slp)
+        self.x0 = float(x0)
+        self.y0 = float(y0)
+
+    def get_y(self,x):
+        return self.slp * (x - self.x0) + self.y0
+
+    def get_x(self,y):
+        return self.x0 + (y - self.y0) / self.slp
+
+class Geobuk(turtle.Turtle):              <strong>#거북이 생성</strong>
+    def __init__(self):
+        super(Geobuk, self).__init__()
+        self.shape('turtle')
+        self.shapesize(2, 2)
+        self.radians()
+        self.width(10)
+        self.getscreen().bgcolor('gray')  <strong>#배경의 색을 회색(청소 전)</strong>
+        self.pencolor('white')			  <strong>#거북이의 움직임을 하얀색(청소 후)</strong>
+
+    def hit_wall(self): 				  <strong>#벽에 부딪혔을 때의 처리</strong>
+        xx = 350						  <strong>#벽의 크기를 설정한다.</strong>
+        yy = 300
+       
+        line = Line(math.tan(self.heading()), self.xcor(), self.ycor())
+        rand_angle = math.pi * random.random()
+
+        if self.towards(-xx, yy) > self.heading() >= self.towards(xx, yy): <strong>#위쪽 벽에 닿았을 때의 처리</strong>
+            des_x = line.get_x(yy)
+            des_y = yy
+            turn_angle = self.heading() + rand_angle
+
+        elif self.towards(-xx, -yy) > self.heading() >= self.towards(-xx, yy):<strong>#왼쪽 벽에 닿았을 때의 처리</strong>
+            des_x = -xx
+            des_y = line.get_y(-xx)
+            turn_angle = self.heading() - 0.5 * math.pi + rand_angle
+
+        elif self.towards(xx, -yy) > self.heading() >= self.towards(-xx, -yy):<strong>#아래쪽 벽에 닿았을 때의 처리</strong>
+            des_x = line.get_x(-yy)
+            des_y = -yy
+            turn_angle = self.heading() - rand_angle
+
+        else: <strong>#오른쪽 벽에 닿았을 때의 처리</strong>
+            des_x = xx 
+            des_y = line.get_y(xx)
+            turn_angle = self.heading() - 0.5 * math.pi - rand_angle
+        self.goto(des_x, des_y)             <strong>#벽에 닿을 때 까지 이동</strong>
+        self.right(turn_angle)              <strong>#회전해서 안쪽으로 방향을 돌림,시계방향으로 회전한다.</strong>
+
+    def run(self):
+        while True:
+            self.hit_wall()
+
+geobuk = Geobuk()				<strong>#청소로봇의 인스턴스 geobuk를 생성</strong>
+
+geobuk.hit_wall()			    <strong>#hit_wall 메소드를 여러번 실행</strong>
+geobuk.hit_wall()
+geobuk.hit_wall()
+
+geobuk.run()					<strong>#시작</strong>
+</code>
+</pre>
+<p><a href="고급예제10.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | &lt;앞으로&gt;</p>
+</body>
+</html>

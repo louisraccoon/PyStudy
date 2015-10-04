@@ -1,0 +1,167 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+<div class="container container-width">
+
+<div class="content row tex2jax_ignore">
+
+
+    <div class="page col-md-9">
+            <h1 class="page-subject">
+                Socket 모듈을 이용한 TCP 서버/클라이언트 채팅 프로그램
+            </h1>
+
+            <p>select 모듈의 select 메소드는 양쪽 모두에서 사용되었다. 네번째 인자로 전달된 값이 '블럭킹'단락에서 언급한 그 타임 아웃 시간이다.</p>
+            <p>10초라는 의미의 값을 전달 했기 때문에 읽어 들일 객체(첫번째 인자에 리스트 형태로 전달한 소켓들)가 없으면 비어있는 리스트를 반환한다.</p>
+
+            <p>select가 반환한 read_socket리스트의 값중에 서버소켓과 같은 객체를 체크해서 새로운 접속인지르 판단한다.</p>
+            <p>listen() 메소드에서 일단 클라이언트의 접속이 되면, accept()를 호출해서 별도의 소켓이 넘겨주고 통신을 진행한다.</p>
+
+            <h3>클라이언트 코드</h3>
+            <p># -*- coding: utf8 -*-</p>
+            <p># socket 모듈을 임포트</p>
+            <p>from socket import *</p>
+            <p>from select import select</p>
+            <p>import sys</p>
+
+            <p># 호스트, 포트와 버퍼 사이즈를 지정</p>
+            <p>HOST = '127.0.0.1'</p>
+            <p>PORT = 56789</p>
+            <p>BUFSIZE = 1024</p>
+            <p>ADDR = (HOST, PORT)</p>
+
+            <p># 소켓 객체를 만들고</p>
+            <p>clientSocket = socket(AF_INET, SOCK_STREAM)</p>
+
+            <p># 서버와의 연결을 시도</p>
+            <p>try: </p>
+            <p>clientSocket.connect(ADDR)</p>
+            <p>except Exception as e:</p>
+            <p>print('채팅 서버(%s:%s)에 연결 할 수 없습니다.' % ADDR)</p>
+            <p>sys.exit()</p>
+            <p>print('채팅 서버(%s:%s)에 연결 되었습니다.' % ADDR)</p>
+
+
+            <p>def prompt():</p>
+            <p>sys.stdout.write('<나> ')</p>
+            <p>sys.stdout.flush()</p>
+
+            <p># 무한 루프를 시작</p>
+            <p>while True:</p>
+            <p>try:</p>
+            <p>connection_list = [sys.stdin, clientSocket]</p>
+
+            <p>read_socket, write_socket, error_socket = select(connection_list, [], [], 10)</p>
+
+            <p>for sock in read_socket:</p>
+            <p>if sock == clientSocket:</p>
+            <p>data = sock.recv(BUFSIZE)</p>
+            <p>if not data:</p>
+            <p>print('채팅 서버(%s:%s)와의 연결이 끊어졌습니다.' % ADDR)</p>
+            <p>clientSocket.close()</p>
+            <p>sys.exit()</p>
+            <p>else:</p>
+            <p>print('%s' % data)  # 메세지 시간은 서버 시간을 따른다</p>
+            <p>prompt()</p>
+            <p>else:</p>
+            <p>message = sys.stdin.readline()</p>
+            <p>clientSocket.send(message)</p>
+            <p>prompt()</p>
+            <p>except KeyboardInterrupt:</p>
+            <p>clientSocket.close()</p>
+            <p>sys.exit()</p>
+
+            <h3>서버 코드</h3>
+
+<p># -*- coding: utf8 -*-</p>
+
+<p># socket 과 select 모듈 임포트</p>
+<p>from socket import *</p>
+<p>from select import *</p>
+<p>import sys</p>
+<p>from time import ctime</p>
+
+
+<p># 호스트, 포트와 버퍼 사이즈를 지정</p>
+<p>HOST = ''</p>
+<p>PORT = 56789</p>
+<p>BUFSIZE = 1024</p>
+<p>ADDR = (HOST, PORT)</p>
+
+<p># 소켓 객체를 만들고..</p>
+<p>serverSocket = socket(AF_INET, SOCK_STREAM)</p>
+
+<p># 서버 정보를 바인딩</p>
+<p>serverSocket.bind(ADDR)</p>
+
+<p># 요청을 기다림(listen)</p>
+<p>serverSocket.listen(10)</p>
+<p>connection_list = [serverSocket]</p>
+<p>print('==============================================')</p>
+<p>print('채팅 서버를 시작합니다. %s 포트로 접속을 기다립니다.' % str(PORT))</p>
+<p>print('==============================================')</p>
+
+<p># 무한 루프를 시작</p>
+<p>while connection_list:</p>
+<p>    try:</p>
+<p>        print('[INFO] 요청을 기다립니다...')</p>
+
+<p>        # select 로 요청을 받고, 10초마다 블럭킹을 해제하도록 함</p>
+<p>        read_socket, write_socket, error_socket = select(connection_list, [], [], 10)</p>
+
+<p>        for sock in read_socket:</p>
+<p>            # 새로운 접속</p>
+<p>            if sock == serverSocket:</p>
+<p>                clientSocket, addr_info = serverSocket.accept()</p>
+<p>                connection_list.append(clientSocket)</p>
+<p>                print('[INFO][%s] 클라이언트(%s)가 새롭게 연결 되었습니다.' % (ctime(), addr_info[0]))</p>
+
+<p>                # 클라이언트로 응답을 돌려줌</p>
+<p>                for socket_in_list in connection_list:</p>
+<p>                    if socket_in_list != serverSocket and socket_in_list != sock:</p>
+<p>                        try:</p>
+<p>                            socket_in_list.send('[%s] 새로운 방문자가 대화방에 들어왔습니다. 반가워요~ 짝짝짝!' % ctime())</p>
+<p>                        except Exception as e:</p>
+<p>                            socket_in_list.close()</p>
+<p>                            connection_list.remove(socket_in_list)</p>
+<p>            # 접속한 사용자(클라이언트)로부터 새로운 데이터 받음</p>
+<p>            else:</p>
+<p>                data = sock.recv(BUFSIZE)</p>
+<p>                if data:</p>
+<p>                    print('[INFO][%s] 클라이언트로부터 데이터를 전달 받았습니다.' % ctime())</p>
+<p>                    for socket_in_list in connection_list:</p>
+<p>                        if socket_in_list != serverSocket and socket_in_list != sock:</p>
+<p>                            try:</p>
+<p>                                socket_in_list.send('[%s] %s' % (ctime(), data))</p>
+<p>                                print('[INFO][%s] 클라이언트로 데이터를 전달합니다.' % ctime())</p>
+<p>                            except Exception as e:</p>
+<p>                                print(e.message)</p>
+<p>                                socket_in_list.close()</p>
+<p>                                connection_list.remove(socket_in_list)</p>
+<p>                                continue</p>
+<p>                else:</p>
+<p>                    connection_list.remove(sock)</p>
+<p>                    sock.close()</p>
+<p>                    print('[INFO][%s] 사용자와의 연결이 끊어졌습니다.' % ctime())</p>
+<p>    except KeyboardInterrupt:</p>
+<p>        # 부드럽게 종료하기</p>
+<p>        serverSocket.close()</p>
+<p>        sys.exit()</p>
+
+            <p>출처 : http://jonnung.blogspot.kr/2014/10/python-socket-chat-programing.html</p>
+<p><a href="고급예제1.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="고급예제3.html">&lt;앞으로&gt;</a></p>
+
+</div>
+
+</div>
+
+</body>
+</html>

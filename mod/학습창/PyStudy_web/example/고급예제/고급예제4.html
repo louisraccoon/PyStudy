@@ -1,0 +1,113 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8">
+</head>
+
+<body>
+
+<div class="container container-width">
+
+<div class="content row tex2jax_ignore">
+
+
+    <div class="page col-md-9">
+            <h1 class="page-subject">
+                RSA 난수 생성
+            </h1>
+
+            <h3>1.RSA 암호</h3>
+            <p>RSA 암호는 공개키암호방식 중 한가지로 송신자가 공개되어 있는 공개키를 사용하여 암호화하고, 수신자가 자신만 가지고 있는 비밀키를 사용하여 복호화한다.</p>
+
+            <h3>2.키 생성법</h3>
+            <p>1.충분히 큰 서로 다른 소수 p,q를 선택한다.</p>
+            <p>2.pi(pq)=(p-1)(q-1) 를 구한다.</p>
+            <p>3.(p-1)과 (q-1)의 최소공배수 L을 구한다.</p>
+            <p>4.L보다 작으면서 서로소인 임의의 자연수 e를 선택한다.</p>
+            <p>5.ed=1(mod L) (max(p,q) < d < pi(pq)) 를 만족하는 d를 구한다.</p>
+
+            <h3>3.코드</h3>
+<p>import random</p>
+
+<p>#p값 입력</p>
+<p>p = input('p = ')</p>
+<p>p = int(p)</p>
+
+<p>#q값 입력</p>
+<p>q = input('q = ')</p>
+<p>q = int(q)</p>
+
+<p>#n = p*q</p>
+<p>n = p*q</p>
+
+<p>#pi = (p-1)*(q-1)</p>
+<p>pi = (p-1)*(q-1)</p>
+
+<p>#최대공약수</p>
+<p>def gcd(a,b):</p>
+<p>    while(b!=0):</p>
+<p>        temp = a%b</p>
+<p>        a = b</p>
+<p>        b = temp</p>
+<p>    return abs(a)</p>
+
+<p>#gcd(b,pi)==1 인 수를 구함</p>
+<p>for i in range(2,pi-1):</p>
+<p>    if gcd(i,pi)==1:</p>
+<p>        b=i</p>
+<p>        break</p>
+
+<p>#Zn*의 값들을 저장하기 위한 리스트</p>
+<p>s = []</p>
+<p>#s의 크기를 알기위한 변수</p>
+<p>cnt_s = 0</p>
+
+<p>#Zn*의 값들을 s리스트에 저장한다.</p>
+<p>for j in range(2,n-1):</p>
+<p>    if gcd(j,n)==1:</p>
+<p>        s.append(j)</p>
+<p>        cnt_s = cnt_s+1</p>
+
+
+<p>#Zn*의 값들중 랜덤으로 하나를 가져온다.</p>
+<p>x0 = random.randrange(0,cnt_s)</p>
+<p>#예제처럼 p=23, q =43을 입력했을때 11을 가져옴</p>
+<p>#x0 = s[9]</p>
+
+<p>#Output</p>
+<p>print("Ouput")</p>
+
+<p>#x의 값들을 저장하기 위한 리스트</p>
+<p>x1 = x0**b%n</p>
+<p>x = [x1]</p>
+
+<p>#비트를 저장하기 위한 y 리스트</p>
+<p>y1 = x[0]%2</p>
+<p>y = [y1]</p>
+
+<p>#주기 체크</p>
+<p>cnt = 1</p>
+
+<p>#난수 생성</p>
+<p>for k in range(1,n):</p>
+<p>    x.append(x[k-1]**b%n)</p>
+<p>    y.append(x[k]%2)</p>
+<p>    cnt = cnt+1</p>
+<p>    if x[k] == x[0]:</p>
+<p>        break</p>
+    
+<p>print("X = ", x)</p>
+<p>print("Y = ", y)</p>
+<p>print("주기 = ", cnt)</p>
+
+
+
+
+</div>
+
+</div>
+<p><a href="고급예제3.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="고급예제5.html">&lt;앞으로&gt;</a></p>
+</body>
+</html>

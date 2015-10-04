@@ -1,0 +1,66 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8">
+</head>
+
+<body>
+
+<div class="container container-width">
+
+<div class="content row tex2jax_ignore">
+
+
+    <div class="page col-md-9">
+            <h1 class="page-subject">
+                Up & Down 게임
+            </h1>
+            <p>Up & Down 게임은 임의의 숫자를 맞추는 게임으로 숫자를 입력했을때 그 숫자보다 작은 값이면 Down, 높은값이면 Up을 말해주는것을 토대로 임의의 숫자를 맞추면 된다.</p>
+
+            <h3>소스</h3>
+<p>import random</p>
+
+<p># 게임을 위한 랜덤 숫자 생성</p>
+
+<p>rn = random.randrange(1, 101, 1)</p>
+<p>num = -1</p>
+
+<p>t_cnt = 0 # 시도횟수</p>
+
+<p>print("1~100 숫자 Up & Down 게임을 시작합니다 !!!")</p>
+<p>print("---------------------------")</p>
+<p>while ( rn != num ):</p>
+
+<p>    num = int(input("1 ~ 100 사이의 숫자를 입력하세요 : "))</p>
+
+<p>    if (num > rn):</p>
+   <p>     print("Down")</p>
+<p>    elif (num < rn):</p>
+   <p>     print("Up")</p>
+
+<p>    t_cnt += 1</p>
+<p>print("---------------------------")</p>
+<p>print(t_cnt, "번 만에 정답을 맞추셨습니다.")</p>
+
+<h3>결과</h3></p>
+<p>1~100 숫자 Up & Down 게임을 시작합니다 !!!</p>
+<p>---------------------------</p>
+<p>1 ~ 100 사이의 숫자를 입력하세요 : 60</p>
+<p>Down</p>
+<p>1 ~ 100 사이의 숫자를 입력하세요 : 55</p>
+<p>Up</p>
+<p>1 ~ 100 사이의 숫자를 입력하세요 : 57</p>
+<p>Up</p>
+<p>1 ~ 100 사이의 숫자를 입력하세요 : 58</p>
+<p>---------------------------</p>
+<p>4 번 만에 정답을 맞추셨습니다.</p>
+
+
+</div>
+
+</div>
+<p><a href="고급예제5.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="고급예제7.html">&lt;앞으로&gt;</a></p>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			#nav_tab {height:35px; width:100%;}
+			#nav_tab ul li {list-style:none; color:white; background-color:#2d2d2d; float:left; line-height:35px; vertical-align:middle; text-align:center;}
+			#nav_tab a {text-decoration:none; color:white; display:block; width:130px; font-size:13px; font-weight: bold;}
+			#nav_tab a:hover {border-bottom:4px solid #FFD343;}
+			#nav_tab a.active {color:#FFD343; font-size:15px; border-bottom:4px solid #FFD343;}
+			
+			h1 {padding:0 46px 0; color:rgb(30,41,51);}
+			.contents {padding:20px 0 0; color:rgb(30,41,51);}
+			a {color:rgb(30,41,51); text-decoration:none; color:rgb(30,41,51)}
+			li {line-height:24px; list-style:square;}
+			.tabs {width:481px;}
+			.tabMenu {height:28px; border-bottom:1px solid #5D5D5D;}
+			.tabMenu li {float:left; position:relative; display:block; width:120px; height:28px; margin-right:5px; text-align:center;}
+			.tabMenu li a {position:absolute; left:0; top:0; display:block; width:120px; height:20px; padding:4px 0; border:1px solid #B7B7B7; color:#4C4C4C; border-bottom:0;}
+			.tabMenu li.active a {width:120px; border:1px solid #5D5D5D; border-bottom:0; background:#ffffff; color:#282828; font-weight:bold;}
+			.tab-cont {margin:-20px 40px 0; clear:both; padding:20px 20px 0; width:400px; border:1px solid #5D5D5D; border-top:0; }
+		</style>
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$(".tab-cont").hide();
+				$(".tabMenu li:first").addClass("active").show();
+				$(".tabMenu li:last").css("margin-right","0");
+				$(".tab-cont:first").show();
+
+				$(".tabMenu li").click(function() {	
+					$(".tabMenu li").removeClass("active");
+					$(this).addClass("active");
+					$(".tab-cont").hide();
+
+					var activeTab = $(this).find("a").attr("href");
+					$(activeTab).show();
+					return false;
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<nav id="nav_tab">
+			<ul>
+				<li><a href="Main.html">Home</a></li>
+				<li>|</li>
+				<li><a href="Introduce.html">Python 소개</a></li>
+				<li>|</li>
+				<li><a href="Install.html">Python 설치과정</a></li>
+				<li>|</li>
+				<li><a class="active" href="Example.html">학습예제</a></li>
+				<li>|</li>
+				<li><a href="Pystudy.html">Pystudy 설명서</a></li>
+				<li>|</li>
+				<li><a href="Site.html">참고 사이트</a></li>
+			</ul>
+		</nav>
+		<div class="contents">
+			<h1>학습예제</h1>
+			<div class="tabs">
+				<ul class="tabMenu">
+					<li class="active"><a href="#tab1">기본예제</a></li>
+					<li><a href="#tab2">고급예제</a></li>
+				</ul>
+				<div class="tabContainer">
+					<div id="tab1" class="tab-cont">
+						<ul>
+							<li><a href="example/기본예제/Chap00.html">Chap00.Python3 vs Python2</a></li>
+							<li><a href="example/기본예제/Chap01.html">Chap01.파이썬 너는 누구?</a></li>
+							<li><a href="example/기본예제/Chap02.html">Chap02.수와 문자의 표현</a></li>
+							<li><a href="example/기본예제/Chap03.html">Chap03.수와 문자의 연산 및 주석처리</a></li>
+							<li><a href="example/기본예제/Chap04.html">Chap04.변수</a></li>
+							<li><a href="example/기본예제/Chap05.html">Chap05.입력과 출력</a></li>
+							<li><a href="example/기본예제/Chap06.html">Chap06.if문</a></li>
+							<li><a href="example/기본예제/Chap07.html">Chap07.while문</a></li>
+							<li><a href="example/기본예제/Chap08.html">Chap08.for문</a></li>
+							<li><a href="example/기본예제/Chap09.html">Chap09.함수</a></li>
+							<li><a href="example/기본예제/Chap10.html">Chap10.파일 읽고 쓰기</a></li>
+							<li><a href="example/기본예제/Chap11.html">Chap11.클래스</a></li>
+							<li><a href="example/기본예제/Chap12.html">Chap12.모듈</a></li>
+							<li><a href="example/기본예제/연습문제">연습문제</a></li>
+						</ul>
+					</div>
+					<div id="tab2" class="tab-cont">
+						<ul>
+							<li><a href="example/고급예제/고급예제1.html">음악검색</a></li>
+							<li><a href="example/고급예제/고급예제2.html">채팅</a></li>
+							<li><a href="example/고급예제/고급예제3.html">시그모이드 함수</a></li>
+							<li><a href="example/고급예제/고급예제4.html">RSA난수</a></li>
+							<li><a href="example/고급예제/고급예제5.html">숫자야구</a></li>
+							<li><a href="example/고급예제/고급예제6.html">Up & Down</a></li>
+							<li><a href="example/고급예제/고급예제7.html">Lotto 자동번호 추출</a></li>
+							<li><a href="example/고급예제/고급예제8.html">Dictionary</a></li>
+							<li><a href="example/고급예제/고급예제9.html">Calendar</a></li>
+							<li><a href="example/고급예제/고급예제10.html">메모장</a></li>
+							<li><a href="example/고급예제/고급예제11.html">자동운전 알고리즘을 통한 로봇청소기 만들기</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

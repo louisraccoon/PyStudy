@@ -1,0 +1,54 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8">
+</head>
+
+<body>
+
+<div class="container container-width">
+
+<div class="content row tex2jax_ignore">
+
+
+    <div class="page col-md-9">
+            <h1 class="page-subject">
+                메모장
+            </h1>
+            <p>파일에 원하는 메모를 저장하고 수정 및 조회가 가능하다.</p>
+            <p>python memo.py -v 를 입력하면 지금까지의 메모를 출력해준다.</p>
+            <p>python memo.py -a 를 입력하면 메모를 입력받아서 memo.txt에 적는다.</p>
+
+            <h3>소스</h3>
+<p>import sys</p>
+<p>import time</p>
+
+<p>def usage():</p>
+<p>    print("""</p>
+<p>Usage</p>
+<p>=====</p>
+<p>python %s -v : View memo</p>
+<p>python %s -a : Add memo</p>
+<p>""" % (sys.argv[0], sys.argv[0]))</p>
+
+<p>if not sys.argv[1:] or sys.argv[1] not in ['-v', '-a']:</p>
+<p>    usage()</p>
+<p>elif sys.argv[1] == '-v':</p>
+<p>    try: print(open("memo.txt").read())</p>
+<p>    except IOError: print("memo does not exist!")</p>
+<p>elif sys.argv[1] == '-a':</p>
+<p>    word = input("Enter memo: ")</p>
+<p>    f = open("memo.txt", 'a')</p>
+<p>    f.write(time.ctime() + ': ' + word+'\n')</p>
+<p>    f.close()</p>
+<p>    print("Added")</p>
+
+
+</div>
+
+</div>
+<p><a href="고급예제9.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="고급예제11.html">&lt;앞으로&gt;</a></p>
+</body>
+</html>

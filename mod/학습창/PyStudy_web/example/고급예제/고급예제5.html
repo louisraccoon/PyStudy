@@ -1,0 +1,80 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8">
+</head>
+
+<body>
+
+<div class="container container-width">
+
+<div class="content row tex2jax_ignore">
+
+
+    <div class="page col-md-9">
+            <h1 class="page-subject">
+                숫자야구게임
+            </h1>
+            <p>숫자야구게임은 랜덤으로 생성된 3자리의 숫자를 맞추는 게임으로 자리수가 같으면 스트라이크, 숫자는 맞지만 자리수가 다르면 볼이되며 3스트라이크가 되면 승리하는 게임이다.</p>
+
+            <h3>소스</h3>
+ <p>import random    </p>
+    <p># 게임을 위한 랜덤 숫자 생성</p>
+<p>    rn = ["0", "0", "0"]</p>
+<p>    rn[0] = str(random.randrange(1, 9, 1))</p>
+<p>    rn[1] = rn[0]</p>
+<p>    rn[2] = rn[0]</p>
+<p>    while (rn[0] == rn[1]):</p>
+<p>        rn[1] = str(random.randrange(1, 9, 1))</p>
+<p>    while (rn[0] == rn[2] or rn[1] == rn[2]):</p>
+<p>        rn[2] = str(random.randrange(1, 9, 1))</p>
+
+<p>    #print(rn)</p>
+
+<p>    t_cnt = 0 # 시도횟수</p>
+   <p> s_cnt = 0 # 스트라이크 갯수</p>
+<p>    b_cnt = 0 # 볼 갯수</p>
+
+<p>    print("숫자야구게임을 시작합니다 !!!")</p>
+   <p> print("---------------------------")</p>
+<p>    while ( s_cnt < 3 ):</p>
+
+<p>        num = str(input("숫자 3자리를 입력하세요 : "))</p>
+
+<p>        s_cnt = 0</p>
+   <p>     b_cnt = 0</p>
+
+<p>        for i in range(0, 3):</p>
+   <p>         for j in range(0, 3):</p>
+      <p>          if(num[i] == str(rn[j]) and i == j):</p>
+         <p>           s_cnt += 1</p>
+            <p>    elif(num[i] == str(rn[j]) and i != j):</p>
+               <p>     b_cnt += 1</p>
+<p>        print("결과 : [", s_cnt, "] Strike [", b_cnt, "] Ball")</p>
+<p>        t_cnt += 1</p>
+<p>    print("---------------------------")</p>
+<p>    print(t_cnt, "번 만에 정답을 맞추셨습니다.")</p>
+
+<h3>결과</h3>
+<p>숫자야구게임을 시작합니다 !!!</p>
+<p>---------------------------</p>
+<p>숫자 3자리를 입력하세요 : 123</p>
+<p>결과 : [ 1 ] Strike [ 0 ] Ball</p>
+<p>숫자 3자리를 입력하세요 : 456</p>
+<p>결과 : [ 2 ] Strike [ 0 ] Ball</p>
+<p>숫자 3자리를 입력하세요 : 156</p>
+<p>결과 : [ 1 ] Strike [ 0 ] Ball</p>
+<p>숫자 3자리를 입력하세요 : 453</p>
+<p>결과 : [ 3 ] Strike [ 0 ] Ball</p>
+<p>---------------------------</p>
+<p>4 번 만에 정답을 맞추셨습니다.</p>
+
+
+</div>
+
+</div>
+<p><a href="고급예제4.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="고급예제6.html">&lt;앞으로&gt;</a></p>
+</body>
+</html>

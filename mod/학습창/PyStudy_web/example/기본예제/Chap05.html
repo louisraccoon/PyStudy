@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+</head>
+
+<body bgcolor="white">
+<p><img src="img/파이썬.jpg" width="381" height="133" alt=""/>
+</p>
+<p>chapter.05 - 입력과 출력<br>
+어떤 변수에 사용자로부터 입력받은 값을 대입하고 싶을 때는 어떻게 해야할까?<br>
+</p>
+<p>
+(1)input의 사용<br>
+int 또는 float,str형의 데이터를 사용자로부터 입력을 받습니다.<br>
+파이썬 2.7버젼의 경우 input 대신 raw_input을 사용해야합니다.<br>
+input으로 입력된 데이터는 str형으로 저장되므로 int,float형으로 사용시 형변환을 사용<br>
+<br>
+#예제5.1<br>
+a=input()<br>
+print(a)<br>
+<br>
+<img src="img/chap5_그림1.jpg" width="283" height="36" alt=""/><br>
+->위의 예제는 'Python is smart. Python is simple.'을 입력시 출력되는 결과를 보여준다.<br>
+</p>
+<p>
+-프롬프트 추가하기<br>
+사용자로부터 입력을 받을 때 "숫자를 입력하세요" 라던지 "이름을 입력하세요"라는<br>
+질문을 포함하고 싶을 것이다. 이것도 input함수를 사용하면 된다.<br>
+<br>
+#예제5.2<br>
+number = input("숫자를 입력하세요 : ")<br>
+print(number)<br>
+<br>
+<img src="img/chap5_그림2.jpg" width="225" height="40" alt=""/><br>
+</p>
+<p>
+(2)print를 자세히 알아보자<br>
+우리가 앞서 사용해 왔던 print가 하는 일은 자료형을 출력하는 것이다.<br>
+<br>
+#예제5.3<br>
+a=123<br>
+b="Python"<br>
+c=[1,2,3]<br>
+<br>
+print(a)<br>
+print(b)<br>
+print(c)<br>
+<br>
+<img src="img/chap5_그림3.jpg" width="127" height="51" alt=""/><br>
+<br>
+위의 예제는 우리가 평소에 사용한 print문이다. 조금 더 자세하게 알아보자.
+</p>
+<p>
+*1.따옴표(")로 둘러싸인 문자열은 + 연산과 동일하다.<br>
+#예제5.4<br>
+print("life" "is" "too short")<br>
+print("life"+"is"+"too short")<br>
+<br>
+<img src="img/chap5_그림4.jpg" width="159" height="33" alt=""/><br>
+<br>
+위의 두문장은 출력 결과가 같다.<br>
+즉 따옴표로 둘러싸인 문자열을 연속해서 쓰면 '+'연산을 한것과 마찬가지이다.<br>
+</p>
+<p>
+*2.문자열 띄어쓰기는 콤마로<br>
+#예제5.5<br>
+print("life","is","too short")<br>
+<br>
+<img src="img/chap5_그림5.jpg" width="166" height="19" alt=""/> </p>
+<p>
+#예제5.6<br>
+<pre><code class="python">
+for i in range(10):
+    print(i,end=' ')
+    </code></pre>
+<p><img src="img/chap5_그림6.jpg" width="167" height="17" alt=""/><br>
+  ->아직 for문을 배우지 않았으므로 그냥 결과값을 확인하기 바란다.  </p>
+<p>&lt;출처&gt; 점프 투 파이썬, 박응용(<a href="https://wikidocs.net/book/1">https://wikidocs.net/book/1</a>)</p>
+<p><a href="Chap04.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="Chap06.html">&lt;앞으로&gt;</a></p>
+</body>
+</html>

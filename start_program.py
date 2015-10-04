@@ -51,7 +51,9 @@ class Main_Process:
             # 모듈PID관리 리스트에 추가
             self.userModulePIDList.append(pid)
         self.userModuleNameList.insert(0,"chat")
+        self.parse_Message("/UserInput /학습창 실행")
         self.running()
+
     def sendMessage(self,MessageBoxId,message):
         self.userModuleQueueList[MessageBoxId].put(message)
     def receiveSystemMessage(self):
@@ -83,7 +85,7 @@ class Main_Process:
                         moduleIndex = self.userModuleNameList.index(command)
                         self.sendMessage(moduleIndex, value)
                     else:
-                        self.sendMessage(0,"/print 존재하지않는 모듈명입니다.1\n( ex: '/모듈명 메시지' )")
+                        self.sendMessage(0,"/print 존재하지않는 모듈명입니다.\n( ex: '/모듈명 메시지' )")
                         self.print_userModuleNameList()
                 else:
                     modulename = value[1:]

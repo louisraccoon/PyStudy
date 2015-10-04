@@ -1,0 +1,64 @@
+
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="container container-width">
+
+<div class="content row tex2jax_ignore">
+
+
+    <div class="page col-md-9">
+            <h1 class="page-subject">
+                Dictionary 프로그램
+            </h1>
+            <p>Dictionary 프로그램은 자신만의 사전을 만들수 있으며 key값과 value값을 입력한다.</p>
+
+<p>  1) 추가, 삭제, 확인, 종료의 네가지 명령을 주문</p>
+
+<p>  2) 추가 명령이 들어오면, Dictionary의 Key 값과 Value값을 입력 요청 후, Dictionary에 추가. </p>
+
+<p>  3) 삭제 명령이 들어오면, Key 값을 요청 후, Dictionary에서 삭제</p>
+
+<p>  4) 확인 명령이 들어오면, 출력해서 보여주기. </p>
+
+<p>  5) 종료 명령이 들어오면 프로그램 종료</p>
+
+            <h3>소스</h3>
+<p>pydic = {}</p>
+<p>while True:</p>
+<p>	print "======================================================================"</p>
+<p>	print "add: Input Data, del: Delete Data, read: Read Data, exit: Program Exit"</p>
+<p>	print "======================================================================"</p>
+<p>	order = str(raw_input("Type your Order:"))</p>
+<p>	if order == 'add':</p>
+<p>		pydic_key = str(raw_input("Input you Key!!"))</p>
+<p>		pydic_value = str(raw_input("Input you Value!!"))</p>
+<p>		pydic[pydic_key] = pydic_value</p>
+<p>		print pydic </p>
+
+<p>	elif order == 'del':</p>
+<p>		pydic_key = str(raw_input("Input you Key!!"))</p>
+<p>		del pydic[pydic_key]</p>
+
+<p>	elif order == 'read':</p>
+<p>		print pydic</p>
+
+<p>	elif order == 'exit':</p>
+<p>		break</p>
+
+<p>	elif order != 'add' and 'del' and 'read' and 'exit':</p>
+<p>		print "Your order is Wrong"</p>  
+
+
+</div>
+
+</div>
+<p><a href="고급예제7.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="고급예제9.html">&lt;앞으로&gt;</a></p>
+</body>
+</html>

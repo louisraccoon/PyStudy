@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<body bgcolor="white">
+<p><img src="img/파이썬.jpg" width="381" height="133" alt=""/></p>
+<p><strong>chapter11. 클래스</strong></p>
+<p><img src="img/chap11_그림1.jpg" width="106" height="42" alt=""/></p>
+<p>-&gt;위의 클래스는 아무런 기능도 갖고 있지 않은 껍질 뿐인 클래스이다. 하지만 이렇게 껍질 뿐인 클래스도 인스턴스(instance)라는 것을 생성하는 기능은 가지고 있다. <br>
+(인스턴스와 객체는 같은 말이다. 클래스에 의해서 생성된 객체를 인스턴스라고 부른다)</p>
+<p>인스턴스는 클래스에 의해서 만들어진 객체로 한개의 클래스는 무수히 많은 인스턴스를 만들어 낼 수가 있다. 위에서 만든 Simple 클래스의 인스턴스를 만드는 방법은 다음과 같다.</p>
+<p><img src="img/chap11_그림2.jpg" width="125" height="28" alt=""/></p>
+<p>-&gt; 바로 Simple()의 결과값을 돌려 받은 a가 인스턴스이다. 마치 함수를 사용해서 그 결과 값을 돌려 받는 모습과 비슷하다.</p>
+<p>조금 더 쉽게 이해해보면 어린시절 뽑기를 해 본적이 있다면 아래 그림과 비슷한 모양의 뽑기 틀을 본적이 있을 것이다. <br>
+  이곳에서 설명할 클래스라는 것이 마치 위 뽑기의 틀(별모양, 하트모양)과 비슷하다. 별 모양의 틀(클래스)로 찍으면 별모양의 뽑기(인스턴스)가 생성되고 <br>
+  하트 모양의 틀(클래스)로 찍으면 하트모양의 뽑기(인스턴스)가 나오는 것이다.</p>
+<p>클래스란 똑같은 무엇인가를 계속해서 만들어 낼 수 있는 설계도면 같은 것이고(뽑기 틀), <br>
+  인스턴스란 클래스에 의해서 만들어진 피조물(별 또는 하트가 찍혀진 뽑기)을 뜻하는 것이다.</p>
+<p><strong>1.클래스 변수</strong></p>
+<p><img src="img/chap11_그림3.jpg" width="288" height="43" alt=""/><br>
+</p>
+<p>-&gt; 위의 클래스 이름은 Service이다. 우리는 위의 Service 클래스를 어떤 유용한 정보를 제공해 주는 한 인터넷 업체라고 해 두자. 이 인터넷 업체는 가입한 고객에게만 유용한 정보를 제공하려 한다. <br>
+  자 그렇다면 가입을 해야만 이 인터넷 업체의 유용한 정보를 얻을 수 있을 것이다.</p>
+<p><img src="img/chap11_그림4.jpg" width="287" height="26" alt=""/><br>
+</p>
+<p>-&gt;위 처럼 하면 pey라는 아이디로 인터넷 서비스 업체인 Service클래스를 이용할 수가 있게 된다. <br>
+  위의 Service 클래스는 마음이 좋아서 돈도 필요 없고 비밀 번호도 필요 없다고 한다.</p>
+<p>자 이제 pey라는 아이디로 위 서비스 업체가 제공하는 정보를 얻어내 보자.</p>
+<p><img src="img/chap11_그림5.jpg" width="178" height="44" alt=""/><br>
+</p>
+<p>-&gt;아이디 이름에다가 서비스 업체가 제공하는 secret라는 변수를 '.'(도트 연산자)를 이용해서 호출하였더니 실로 어마어마한 정보를 얻을 수 있었다.</p>
+<p><strong>2.클래스 함수</strong><br>
+</p>
+<p>예제11.1<br>
+</p>
+<pre><code class = "python">
+class Service:<br>	secret = &quot;영구는 배꼽이 두 개다&quot;<br>	def sum(self, a, b):<br>		result = a + b<br>		print(&quot;%s + %s = %s 입니다.&quot; % (a, b, result))</code></pre>
+<p>-&gt; 두 수를 더하는 서비스를 제공해 주기 위해서 이 서비스 업체는 위와 같이 업그레이드 했다.</p>
+<p>*서비스 업체에 가입을 해서 아이디를 받는다.</p>
+<p>pey = Service()</p>
+<p>*더하기 서비스를 이용한다.</p>
+<p>pey.sum(1,1)</p>
+<p><img src="img/chap11_그림6.jpg" width="144" height="18" alt=""/></p>
+<p>이번에는 서비스 업체의 입장에서 생각해 보도록 하자. 서비스 업체는 오직 가입한 사람들에게만 서비스를 제공하고 싶어한다. 이를 위해서 그들은 더하기 제공하는 서비스에 트릭을 가했다. <br>
+위에서 보았던 더하기 해주는 함수를 다시 보면 다음과 같다.</p>
+<p><img src="img/chap11_그림7.jpg" width="362" height="63" alt=""/></p>
+<p>-&gt; 이 사람이 가입을 한 사람인지 안한 사람인지 가리기 위해서 위처럼 sum이라는 함수의 첫 번째 입력 값으로 self라는 것을 집어넣었다.</p>
+<p>서비스 업체는 sum함수의 첫 번째 입력 값을 통해서 가입 여부를 판단했다.</p>
+<p><img src="img/chap11_그림8.jpg" width="147" height="27" alt=""/></p>
+<p>-&gt; 위의 sum함수를 호출하는 방법을 보면 pey라는 것이 중복해서 사용되었음을 볼 수 있다.</p>
+<p>따라서 다음과 같은 문장만으로 sum함수는 이 사람이 pey라는 아이디를 가지고 있음을 알 수 있을 것이다.</p>
+<p><img src="img/chap11_그림9.jpg" width="145" height="27" alt=""/></p>
+<p><strong>3. self 제대로 알기</strong><br>
+서비스업체의 Service 클래스를 업그레이드 하게되었다.</p>
+<p>예제11.2<br></p>
+<pre><code>
+class Service:
+	secret = &quot;영구는 배꼽이 두 개다&quot;
+	def setname(self, name):		
+    	self.name = name
+	def sum(self, a, b):		
+    	result = a + b
+		print(&quot;%s님 %s + %s = %s입니다.&quot; % (self.name, a, b, result))</code></pre>
+<p>*먼저 서비스에 가입을 해서 pey라는 아이디를 얻는다.<br>
+pey = Service()</p>
+<p>*다음에 pey라는 아이디를 가진 사람의 이름이 &quot;홍길동&quot; 임을 서비스에 알려준다.<br>
+  pey.setname(&quot;홍길동&quot;)</p>
+<p>*다음에 더하기 서비스를 이용한다.<br>
+  pey.sum(1,1)</p>
+<p><img src="img/chap11_그림10.jpg" width="189" height="20" alt=""/></p>
+<p><img src="img/chap11_그림11.jpg" width="318" height="262" alt=""/></p>
+<p>-&gt; 위와 같은 상황이 발생 했을 때 서비스 제공 업체의 setname함수는 다음과 같이 생각한다.</p>
+<p>&quot;pey라는 아이디를 가진 사람이 자신의 이름을 '홍길동'으로 설정하려고 하는 구나. <br>
+  그렇다면 앞으로 pey라는 아이디로 접근하면 이 사람의 이름이 '홍길동'이라는 것을 잊지 말아야 겠다.&quot;</p>
+<p>위와같은 기능을 하는 것이 self이다.</p>
+<p><img src="img/chap11_그림12.jpg" width="609" height="284" alt=""/></p>
+<p>이제 아이디 pey에 그 사람의 이름을 부여하는 과정이 끝이 났다.</p>
+<p><img src="img/chap11_그림13.jpg" width="478" height="71" alt=""/></p>
+<p>-&gt; &quot;1 + 1 = 2 입니다.&quot; 라는 서비스만을 제공했던 이전의 sum함수와 비교해 보면 다른 점은 단 하나, self.name이라는 것을 출력 문자열에 삽입한 것 뿐이다.</p>
+<p>먼저 setname함수에 의해서 &quot;홍길동&quot; 이라는 이름을 설정해 주었기 때문에 pey.name이 &quot;홍길동&quot; 이라는 값을 갖게 된다는 사실을 이미 알아보았다. <br>
+  따라서 sum함수에서도 self.name은 pey.name으로 치환되기 때문에 sum함수는 pey라는 아이디를 가진 사람의 이름을 알아채게 되는 것이다.</p>
+<p><strong>4.__init__ 이란 무엇인가?</strong><br>
+  </p>
+<p>예제11.3<br></p>
+<pre><code class="python">
+class Service:
+	secret = &quot;영구는 배꼽이 두 개다&quot;
+	def __init__(self, name):
+  		self.name = name
+  	def sum(self, a, b):
+  		result = a + b
+  		print(&quot;%s님 %s + %s = %s입니다.&quot; % (self.name, a, b, result))
+        </code></pre>
+<p>-&gt; 위의 Service클래스를 이전의 클래스와 비교해 보면 바뀐 부분은 딱 한가지이다. 바로 setname함수의 이름인 setname이 __init__으로 바뀐 것이다. <br>
+클래스에서 이 __init__이란 함수는 특별한 의미를 갖는다. 의미는 다음과 같다.</p>
+<p>&quot;인스턴스를 만들 때 항상 실행된다.&quot; 즉, 아이디를 부여받을 때 항상 실행된다는 말이다.</p>
+<p>* __init__ 함수를 이용하여 가입과 sum을 사용하면<br>
+  pey = Service(&quot;홍길동&quot;)<br>
+  pey.sum(1, 1)</p>
+<p>-&gt; 이전과 비교해 3번 입력해야 할 것을 2번입력하게 되었다.<br>
+</p>
+<p>5. 클래스의 구조</p>
+<p><img src="img/chap11_그림14.jpg" width="331" height="250" alt=""/></p>
+<p>class라는 키워드는 클래스를 만들 때 쓰이는 예약어<br>
+  그 바로 뒤에는 클래스이름을 써 주어야 한다<br>
+  클래스 이름 뒤에 상속할 클래스가 있다면 괄호(())안에 상속할 클래스 이름을 쓴다. <br>
+클래스 내부에는 클래스 변수와 클래스 함수들이 있다.</p>
+<p>예제11.4 사칙 연산하는 클래스 만들기(실행해보고 결과 확인하자)</p>
+<p><br>
+  <img src="img/chap11_그림15.jpg" width="338" height="293" alt=""/></p>
+<p><img src="img/chap11_그림16.jpg" width="284" height="376" alt=""/></p>
+<p>예제11.5 &quot;박씨네 집&quot; 클래스(실행해보고 결과 확인하자)<br>
+</p>
+<p><img src="img/chap11_그림17.jpg" width="510" height="527" alt=""/></p>
+<p>&lt;출처&gt; 점프 투 파이썬, 박응용(<a href="https://wikidocs.net/book/1">https://wikidocs.net/book/1</a>)</p>
+<p><a href="Chap10.html">&lt;뒤로&gt;</a> | <a href="../../Example.html">&lt;메뉴&gt;</a> | <a href="Chap12.html">&lt;앞으로&gt;</a><br>
+</p>
+</body>
+</html>

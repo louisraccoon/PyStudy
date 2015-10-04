@@ -51,12 +51,16 @@ class Chat_interface_tkinter():
         #Create a window
         self.root = Tk()
         self.root.title("PyStudy console")
-        self.root.geometry("400x500")
+        self.root.geometry("430x500")
         self.root.resizable(width=FALSE, height=FALSE)
 
         #Create a Chat window
-        self.ChatLog = Text(self.root, bd=0, bg="white", height="8", width="50", font="Arial",)
-        self.ChatLog.insert(END, "대화창 활성화..\n")
+        self.ChatLog = Text(self.root, bd=0, bg="white", height="8", width="50", font="Arial",foreground="#ef2020")
+        self.ChatLog.insert(END, "PyStudy콘솔 활성화되었습니다...\n 학습창 실행은 \'/학습창 실행\'을 입력해주세요.\n \'/ \'를 입력하시면 모듈명리스트를 보실수 있습니다.\n")
+        self.ChatLog.configure(fg='black')
+
+
+        #self.ChatLog.configure(self,foreground="#ffffff")
         self.ChatLog.config(state=DISABLED)
 
         #Bind a scrollbar to the Chat window
@@ -75,9 +79,9 @@ class Chat_interface_tkinter():
         self.EntryBox.bind("<KeyPress>", self.eventKeyPressEntrybox)
 
         #Place all components on the screen
-        self.scrollbar.place(x=376,y=6, height=386)
-        self.ChatLog.place(x=6,y=6, height=386, width=370)
-        self.EntryBox.place(x=6, y=401, height=30, width=265)
+        self.scrollbar.place(x=406,y=6, height=386)
+        self.ChatLog.place(x=6,y=6, height=386, width=400)
+        self.EntryBox.place(x=6, y=401, height=30, width=295)
         self.SendButton.place(x=271, y=401, height=30)
 
         self.systemqueue = systemqueue
