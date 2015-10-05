@@ -34,7 +34,8 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.dirty = False
         self.plainTextEdit_2.textChanged.connect(self.setDirty)
         self.fileName = None
-
+        self.plainTextEdit_2.setTabStopWidth(35)
+        self.plainTextEdit_2.setPlainText("# 반갑습니다~\n# #은 파이썬에서 주석입니다.\nprint(\"이 부분은 출력창입니다.\")\nprint(\"구구단 예제\")\nfor i in range(2,10):\n\tprint(i,\"단\")\n\tfor j in range(2,10):\n\t\tprint(i,\"X\", j, \"=\", i*j)\n# 파이썬 실행은 아래 실행버튼을 눌러주세요.\n# 파이썬 학습 관련 및 예제는 왼쪽 화면을 이용하시기 바랍니다.")
 
         #web view
         #self.exampleView.load(QUrl("http://www.google.com"))
@@ -96,6 +97,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.actionFile_Save_as.triggered.connect(self.clickAction_fileSaveAs)
         self.action_example.triggered.connect(self.clickAction_exampleOpen)
         self.actionPythonHelp.triggered.connect(self.clickAction_PythonHelp)
+        self.actionHelp.triggered.connect(self.clickAction_ProgramHelp)
         self.MessagepushButton.clicked.connect(self.clickAction_MessagePushButton)
         self.actionStyleSheet_default.triggered.connect(self.clickAction_styleDefault)
         self.actionStyleSheet_Black.triggered.connect(self.clickAction_styleBlack)
@@ -237,6 +239,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.set_StyleSheet("default")
     def clickAction_styleBlack(self):
         self.set_StyleSheet("black")
+    def clickAction_ProgramHelp(self):
+        self.startfilepath=os.getcwd() +"/PyStudy_web/Pystudy.html"
+        self.exampleView.load(QUrl.fromLocalFile(self.startfilepath))
     def set_StyleSheet(self, sheetName):
         if sheetName:
             file = QFile('stylesheet/%s.qss' % sheetName.lower())

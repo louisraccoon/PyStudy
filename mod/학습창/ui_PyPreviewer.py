@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PyPreviewer.ui'
 #
-# Created: Sun Oct  4 21:24:59 2015
+# Created: Mon Oct  5 20:35:14 2015
 #      by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -310,7 +310,7 @@ class Ui_MainWindow(object):
         self.actionFile_Open.setText(_translate("MainWindow", "소스파일 열기"))
         self.actionFile_Save.setText(_translate("MainWindow", "소스파일 저장"))
         self.actionFile_Save_as.setText(_translate("MainWindow", "소스파일 다른이름으로 저장"))
-        self.actionHelp.setText(_translate("MainWindow", "Help"))
+        self.actionHelp.setText(_translate("MainWindow", "PyStudy 도움말"))
         self.actionAbout_PyStudy.setText(_translate("MainWindow", "about PyStudy"))
         self.actionRun.setText(_translate("MainWindow", "실행"))
         self.actionStop.setText(_translate("MainWindow", "정지"))

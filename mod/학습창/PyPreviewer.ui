@@ -412,7 +412,7 @@
      <normaloff>:/newPrefix/img/24x24/Help book 3d.png</normaloff>:/newPrefix/img/24x24/Help book 3d.png</iconset>
    </property>
    <property name="text">
-    <string>Help</string>
+    <string>PyStudy 도움말</string>
    </property>
   </action>
   <action name="actionAbout_PyStudy">
