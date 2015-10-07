@@ -20,7 +20,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.start_logo()
 
         self.setupUi(self)
-
+        self.sysencoding =sys.stdout.encoding
         #self.centralWidget = PyPreviewer(self)
         #self.setCentralWidget(self.centralWidget)
         self.setupEditor()
@@ -35,7 +35,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.plainTextEdit_2.textChanged.connect(self.setDirty)
         self.fileName = None
         self.plainTextEdit_2.setTabStopWidth(35)
-        self.plainTextEdit_2.setPlainText("# 반갑습니다~\n# #은 파이썬에서 주석입니다.\nprint(\"이 부분은 출력창입니다.\")\nprint(\"구구단 예제\")\nfor i in range(2,10):\n\tprint(i,\"단\")\n\tfor j in range(2,10):\n\t\tprint(i,\"X\", j, \"=\", i*j)\n# 파이썬 실행은 아래 실행버튼을 눌러주세요.\n# 파이썬 학습 관련 및 예제는 왼쪽 화면을 이용하시기 바랍니다.")
+        self.plainTextEdit_2.setPlainText("# -*- coding: utf-8 -*-\n# 반갑습니다~\n# #은 파이썬에서 주석입니다.\nprint(\"이 부분은 출력창입니다.\")\nprint(\"구구단 예제\")\nfor i in range(2,10):\n\tprint(i,\"단\")\n\tfor j in range(2,10):\n\t\tprint(i,\"X\", j, \"=\", i*j)\n# 파이썬 실행은 아래 실행버튼을 눌러주세요.\n# 파이썬 학습 관련 및 예제는 왼쪽 화면을 이용하시기 바랍니다.")
 
         #web view
         #self.exampleView.load(QUrl("http://www.google.com"))
@@ -202,11 +202,21 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         #self.output.ensureCursorVisible()
 
     def stdoutReady(self):
-        text = str(self.process.readAllStandardOutput(), "utf-8")
+        if self.sysencoding == "cp949":
+            text = str(self.process.readAllStandardOutput(), "cp949")#독립실행시
+        elif self.sysencoding == "UTF-8":
+            text = str(self.process.readAllStandardOutput(), "utf-8")#pycharm
+        else:
+            text = str(self.process.readAllStandardOutput(), "cp949")#독립실행시
         self.append_plainTextEdit_3(text)
 
     def stderrReady(self):
-        text = str(self.process.readAllStandardError(), "utf-8")
+        if self.sysencoding == "cp949":
+            text = str(self.process.readAllStandardError(), "cp949")#독립실행시
+        elif self.sysencoding == "UTF-8":
+            text = str(self.process.readAllStandardError(), "utf-8")#pycharm
+        else:
+            text = str(self.process.readAllStandardError(), "cp949")#독립실행시
         self.append_plainTextEdit_3(text)
 
     def clickAction_PythonHelp(self):
