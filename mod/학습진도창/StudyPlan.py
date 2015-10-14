@@ -571,7 +571,8 @@ class MainWindow(QMainWindow):
         #self.system
         #index.data()
         #self.table.selectedIndexes()[0].data()
-        filepath = r"tutorial\\"+self.table.selectedIndexes()[0].data()+".html"
+        tempstr = self.table.selectedIndexes()[0].data().split()
+        filepath = r"PyStudy_web\\example\\기본예제\\"+tempstr[0]+".html"
         selectedRowKey = self.table.selectedIndexes()[0].row()+1#mysql 테이블 줄수 차이
         #print("click test ",selectedRowKey )
         con = sqlite3.connect("mystudy.db")

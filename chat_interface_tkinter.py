@@ -56,7 +56,7 @@ class Chat_interface_tkinter():
 
         #Create a Chat window
         self.ChatLog = Text(self.root, bd=0, bg="white", height="8", width="50", font="Arial",foreground="#ef2020")
-        self.ChatLog.insert(END, "PyStudy콘솔 활성화되었습니다...\n 학습창 실행은 \'/학습창 실행\'을 입력해주세요.\n \'/ \'를 입력하시면 모듈명리스트를 보실수 있습니다.\n")
+        self.ChatLog.insert(END, "PyStudy콘솔 활성화되었습니다...\n 학습창 실행은 \'/학습창 실행\'을 입력해주세요.\n (학습관리는 \'/학습진도창 실행\'을 입력)\n \'/ \'를 입력하시면 모듈명리스트를 보실수 있습니다.\n")
         self.ChatLog.configure(fg='black')
 
 

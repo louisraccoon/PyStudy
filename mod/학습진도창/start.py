@@ -2,7 +2,7 @@
 import os
 from PyQt5.QtCore import QProcess
 from common_module_lib import *
-from mod.학습.StudyPlan import *
+from mod.학습진도창.StudyPlan import *
 
 def initModule(systemMessageBox, myMessageBox):
     myModule = Module(systemMessageBox, myMessageBox)
@@ -15,7 +15,7 @@ def initModule(systemMessageBox, myMessageBox):
 '''
 def mainfunction(system):
     ############### 모듈 정보 ############################
-    modulefoldername = "학습"# 모듈폴더명과 항상 같아야한다.
+    modulefoldername = "학습진도창"# 모듈폴더명과 항상 같아야한다.
     runFileName = r"\StudyPlan.py"# 모듈에서 실행할 파이썬 파일 꼭 파일명앞에 \(역슬래시 붙여주어야한다.)
     ############################################################
 
@@ -24,7 +24,7 @@ def mainfunction(system):
     temppath=os.getcwd()+runFileName
     while 1:
         message = system.receiveMessage()
-        if message =="시작":
+        if message =="실행":
             system.printMessage(modulefoldername+"모듈이 실행되었습니다.")
             #mypreviewer_process=QProcess()
             #mypreviewer_process.start('python', [temppath])
@@ -33,5 +33,5 @@ def mainfunction(system):
         else:
             system.printMessage(" <"+modulefoldername+"> 메시지목록 ")
             system.printMessage("------------------------------------------------")
-            system.printMessage("1)시작          ex)'/학습 시작'")
+            system.printMessage("1)실행          ex)'/"+modulefoldername+" 실행'")
             system.printMessage("------------------------------------------------")
