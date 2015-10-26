@@ -231,7 +231,13 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.append_plainTextEdit_3(temp)
         self.append_plainTextEdit_3("\n")
         bArray = QByteArray()
-        bArray.append(temp)
+
+        if self.sysencoding == "cp949":
+            bArray.append(temp.encode(encoding='cp949',errors='ignore'))#독립실행시
+        elif self.sysencoding == "UTF-8":
+            bArray.append(temp.encode(encoding='utf-8',errors='ignore'))#pycharm
+        else:
+            bArray.append(temp.encode(encoding='cp949',errors='ignore'))#독립실행시
         bArray.append("\n")
         if( self.process.write(bArray) == -1):
             print("chlidprocess write error")

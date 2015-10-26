@@ -18,10 +18,13 @@ def initModule(systemMessageBox, myMessageBox):
     myModule = Module(systemMessageBox, myMessageBox)
     mainfunction(myModule)
 def mainfunction(system):
-    print("------mymod1 process start -------")
+    ############### 모듈 정보 ############################
+    modulefoldername = "mymod1"# 모듈폴더명과 항상 같아야한다.
+    ############################################################
+    print("------"+modulefoldername+" process start -------")
     while 1:
         message = system.receiveMessage()# 사용자로부터 입력된 메시지
-        print("[To mymod1]:"+message)
-        system.sendMessage("/mymod2 how are you?")
-        system.printMessage("mymod1 receive:"+message)
+        #system.sendMessage("/mymod2 how are you?")
+        system.printMessage(modulefoldername+" receive:"+message)
+
 

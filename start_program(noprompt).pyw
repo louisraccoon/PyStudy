@@ -25,11 +25,11 @@ class Main_Process:
         self.userModulePIDList=[]
         #GUI 프로세스 생성
         #기본적으로 userModuleNameList[0]에는  채팅창 프로세스가 들어있다.
-        chatModuleMessageBox = Queue(10)
-        pid = multiprocessing.Process(target=call_chat_interface, args=(self.systemMessageBox, chatModuleMessageBox ))
-        pid.start()
-        self.userModuleQueueList.append(chatModuleMessageBox)
-        self.userModulePIDList.append(pid)
+        self.chatModuleMessageBox = Queue(10)
+        self.chatpid = multiprocessing.Process(target=call_chat_interface, args=(self.systemMessageBox, self.chatModuleMessageBox ))
+        self.chatpid.start()
+        self.userModuleQueueList.append(self.chatModuleMessageBox)
+        self.userModulePIDList.append(self.chatpid)
         #각 유저모듈 생성 작업
         for i,v in enumerate(self.userModuleNameList):
             print("------- {0} 번재 모듈 -------------".format(i+1))
@@ -50,7 +50,7 @@ class Main_Process:
             pid.start()
             # 모듈PID관리 리스트에 추가
             self.userModulePIDList.append(pid)
-        self.userModuleNameList.insert(0,"chat")
+        self.userModuleNameList.insert(0,"chating_module")
         self.parse_Message("/UserInput /학습창 실행")
         self.running()
 
@@ -75,8 +75,12 @@ class Main_Process:
             elif "/UserInput" == command:
                 if value[0] != '/':
                     #user말 따라하기
-                    print("[system]: user say "+value)
-                    self.sendMessage(0,"/print user say "+value)
+                    #print("[system]: user say "+value)
+                    #self.sendMessage(0,"/print user say "+value)
+                    self.parse_Message("/UserInput /conversation "+value)
+                elif value.find('/reload') != -1:
+                    self.reload_modulelist()
+                    self.sendMessage(0,"/print 모든 모듈을 다시 불러옵니다.")
                 elif value.find(' ') != -1 :
                     command, value = value.split(' ', 1)
                     command = command[1:]# 모듈명 앞에 붙은 슬래시 제거( ex:/mymod1 -> mymod1
@@ -96,6 +100,7 @@ class Main_Process:
                     else:
                         self.sendMessage(0,"/print 존재하지않는 모듈명입니다.\n( ex: '/모듈명 메시지' )")
                         self.print_userModuleNameList()
+                        self.sendMessage(0,"/print 모듈목록 새로고침( ex: '/reload' )")
             elif "/programExit" == command:
                 quit()
             elif command[0] == '/':
@@ -108,7 +113,6 @@ class Main_Process:
                     self.sendMessage(0,"/print 존재하지않는 모듈명입니다.\n( ex: '/모듈명 메시지' )")
                     self.print_userModuleNameList()
 
-
     def running(self):
         while 1:
             #시스템 메시지 박스 불러오기
@@ -117,6 +121,42 @@ class Main_Process:
         self.sendMessage(0,"/print <사용가능한 모듈 목록>")
         for moduleName in self.userModuleNameList:
             self.sendMessage(0,"/print ◎"+moduleName)
+    def reload_modulelist(self):
+        for i,v in enumerate(self.userModulePIDList):
+            if i !=0 :
+                self.userModulePIDList[i].terminate()
+                self.userModulePIDList[i].join()
+        #유저모듈명 사전수집
+        self.userModuleNameList = getDirectoryList()
+        #유저모듈 형식 검사
+        #self.userModuleNameList = ['mymod1','mymod2']
+        self.userModuleTotalNum = len(self.userModuleNameList)
+        self.userModuleQueueList =[]
+        self.userModulePIDList=[]
+        #GUI 프로세스 생성
+        #기본적으로 userModuleNameList[0]에는  채팅창 프로세스가 들어있다.
+        self.userModuleQueueList.append(self.chatModuleMessageBox)
+        self.userModulePIDList.append(self.chatpid)
+        #각 유저모듈 생성 작업
+        for i,v in enumerate(self.userModuleNameList):
+            print("------- {0} 번재 모듈 -------------".format(i+1))
+            print("Index: {0}, Value: {1}".format(i+1, v))
+            #유저모듈메시지박스 생성
+            userModuleMessageBox = Queue(10)
+            self.userModuleQueueList.append(userModuleMessageBox)
+            # 동적 모듈로딩
+            tempModulePath = 'mod.'+self.userModuleNameList[i]+'.start'
+            module = importlib.import_module(tempModulePath)
+            #print(getattr(module, "Module"))
+            #print(getattr(module, "myfunction"))
+            #모듈속 initModule함수  myfunc로 이름 재정의
+            myfunc = getattr(module, "initModule")
+            # 모듈용 프로세스 생성
+            pid = multiprocessing.Process(target=myfunc, args=(self.systemMessageBox, userModuleMessageBox))
+            pid.start()
+            # 모듈PID관리 리스트에 추가
+            self.userModulePIDList.append(pid)
+        self.userModuleNameList.insert(0,"chating_module")
     def __del__(self):
         for i,v in enumerate(self.userModulePIDList):
             self.userModulePIDList[i].terminate()
